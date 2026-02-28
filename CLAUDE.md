@@ -68,6 +68,10 @@ No CI/CD pipeline. Releases are built manually with `build.sh` and distributed a
 - Respond to the user **in Russian**
 - Write code comments, commit messages, and `.md` files **in English**
 
+## Workflow
+
+- **Plan on Opus** (max iterations, precise change descriptions down to exact files/functions/lines), **implement on Sonnet** — switch model after plan approval.
+
 ## Important Constraints
 
 - **Objective-C only** — do not introduce Swift files
