@@ -97,7 +97,7 @@
     
     
     // core path
-    self.corePathField.stringValue = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/xray-core/",NSHomeDirectory()];
+    self.corePathField.stringValue = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/",NSHomeDirectory()];
     self.enableRestore = configWindowController.enableRestore;
     
     self.enableEncryption = configWindowController.enableEncryption;
@@ -523,7 +523,7 @@
     } else if ([@"Core" isEqualToString:tabTitle]) {
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://xtls.github.io/en/document/install.html"]];
     } else {
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/tzmax/V2RayXS#readme"]];
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/farestz/V2RayXS#readme"]];
     }
 }
 

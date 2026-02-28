@@ -1,4 +1,4 @@
-# V2RayXS
+# V2RayXL
 
 macOS menu-bar GUI client for xray-core (proxy). Objective-C + AppKit (no Swift/SwiftUI). Abandoned upstream; this is an active fork.
 
@@ -6,7 +6,7 @@ macOS menu-bar GUI client for xray-core (proxy). Objective-C + AppKit (no Swift/
 
 - Language: Objective-C (AppKit/Cocoa), C (system helper)
 - UI: AppKit with XIB files (no SwiftUI)
-- Build: Xcode project (`V2RayXS.xcodeproj`)
+- Build: Xcode project (`V2RayXL.xcodeproj`)
 - Frameworks: Cocoa, SystemConfiguration, libz
 - Bundled: GCDWebServer (git submodule), Tun2socks.xcframework
 
@@ -22,7 +22,7 @@ macOS menu-bar GUI client for xray-core (proxy). Objective-C + AppKit (no Swift/
 
 ```bash
 # Debug build
-xcodebuild -project V2RayXS.xcodeproj -target V2RayXS -configuration Debug
+xcodebuild -project V2RayXL.xcodeproj -target V2RayXL -configuration Debug
 
 # Release build for current arch
 bash build.sh
@@ -30,13 +30,13 @@ bash build.sh
 # Release build for specific arch
 bash build.sh x86_64   # or arm64
 
-# Output: build/Release/V2RayXS.app
+# Output: build/Release/V2RayXL.app
 ```
 
 ### Xcode build targets
 
-- **V2RayXS** — main app target
-- **v2rayx_sysconf** — privileged C helper (system proxy / routing / TUN)
+- **V2RayXL** — main app target
+- **v2rayxl_sysconf** — privileged C helper (system proxy / routing / TUN)
 
 No test targets exist. Testing is manual: build and run the app.
 
@@ -48,16 +48,16 @@ ServerProfile                — model: VMess/VLESS server configs
 ConfigWindowController       — main server config UI
 AdvancedWindowController     — outbounds, routing rules, subscriptions
 ConfigImporter               — parses VMess/VLESS links and subscription URLs
-GCDWebServer                 — local HTTP server for PAC file (port 8070)
-v2rayx_sysconf               — C helper: system proxy settings, routing, TUN device
+GCDWebServer                 — local HTTP server for PAC file (port 8071)
+v2rayxl_sysconf              — C helper: system proxy settings, routing, TUN device
 ```
 
 ## Config Paths
 
-- Preferences: `~/Library/Preferences/cenmrev.V2RayXS.plist`
-- App support: `~/Library/Application Support/V2RayXS/`
-- Generated xray config: `~/Library/Application Support/V2RayXS/config.json`
-- PAC file: served locally on port 8070
+- Preferences: `~/Library/Preferences/cenmrev.V2RayXL.plist`
+- App support: `~/Library/Application Support/V2RayXL/`
+- Generated xray config: `~/Library/Application Support/V2RayXL/config.json`
+- PAC file: served locally on port 8071
 
 ## CI/CD
 
@@ -71,6 +71,7 @@ No CI/CD pipeline. Releases are built manually with `build.sh` and distributed a
 ## Workflow
 
 - **Plan on Opus** (max iterations, precise change descriptions down to exact files/functions/lines), **implement on Sonnet** — switch model after plan approval.
+- **Git operations** (status, diff, log, commit) — delegate to subagents on **Haiku** to save context and cost.
 
 ## Important Constraints
 
@@ -78,7 +79,7 @@ No CI/CD pipeline. Releases are built manually with `build.sh` and distributed a
 - **AppKit/XIB only** — do not introduce SwiftUI
 - Do not add XCTest unless specifically asked
 - Xray binary is NOT in git — must be downloaded separately via `dlcorex.sh`
-- `v2rayx_sysconf` helper needs elevated privileges for system proxy/routing changes
+- `v2rayxl_sysconf` helper needs elevated privileges for system proxy/routing changes
 - TUN mode is experimental; can break routing if misused
 - Minimum deployment target: macOS 10.12 (most APIs used are 10.13+)
 - Separate builds required for x86_64 and arm64 (xray binary is arch-specific too)

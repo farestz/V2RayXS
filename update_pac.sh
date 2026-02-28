@@ -1,11 +1,11 @@
 #!/bin/bash
 # supported by @xuxucode, related links: https://github.com/Cenmrev/V2RayX/issues/320
-# related issue: https://github.com/tzmax/V2RayXS/issues/37
+# related issue: https://github.com/tzmax/V2RayXL/issues/37
 
-PAC_DIR_PATH="${HOME}/Library/Application Support/V2RayXS/pac/"
+PAC_DIR_PATH="${HOME}/Library/Application Support/V2RayXL/pac/"
 OUT_FILE="${PAC_DIR_PATH}gfwlist.js"
 if [ ! -d "${PAC_DIR_PATH}" ]; then
-  echo -e "V2RayXS is not installed or the pac directory is corrupted\n"
+  echo -e "V2RayXL is not installed or the pac directory is corrupted\n"
   exit 2
 fi
 

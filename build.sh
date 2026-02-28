@@ -2,7 +2,7 @@
 ###
  # @Author: Bin
  # @Date: 2023-02-14
- # @FilePath: /V2RayXS/build.sh
+ # @FilePath: /V2RayXL/build.sh
 ### 
 
 VERSION=$(git describe --tags --always)
@@ -23,18 +23,18 @@ if [[ -n "$1" ]]; then
 fi
 
 XCODEBUILD_ARGS=(
-    -project V2RayXS.xcodeproj 
-    -target V2RayXS 
+    -project V2RayXL.xcodeproj 
+    -target V2RayXL 
     -configuration Release 
     ARCHS="${useArch}"
 )
 
 if [[ ! -f /Applications/Xcode.app/Contents/MacOS/Xcode ]]; then
-    echo -e "${RED}Xcode is needed to build V2RayXS, Please install Xcode from App Store!${NORMAL}"
-    echo -e "${RED}编译 V2RayXS 需要 Xcode.app，请从 App Store 里安装 Xcode.${NORMAL}"
+    echo -e "${RED}Xcode is needed to build V2RayXL, Please install Xcode from App Store!${NORMAL}"
+    echo -e "${RED}编译 V2RayXL 需要 Xcode.app，请从 App Store 里安装 Xcode.${NORMAL}"
 else
-    echo -e "${BOLD}-- Start building V2RayXS --${NORMAL}"
-    echo -e "${BOLD}-- 开始编译 V2RayXS --${NORMAL}"
+    echo -e "${BOLD}-- Start building V2RayXL --${NORMAL}"
+    echo -e "${BOLD}-- 开始编译 V2RayXL --${NORMAL}"
     git submodule update --init --recursive
     export SRCROOT="$PROJECT_ROOT"
     export ARCHS="${useArch}"
@@ -44,22 +44,22 @@ else
     if [[ $? == 0 ]]; then
         echo -e "${GREEN}-- Build succeeded --${NORMAL}"
         echo -e "${GREEN}-- 编译成功 --${NORMAL}"
-        echo -e "${BOLD}V2RayXS.app: $(pwd)/build/Release/V2RayXS.app${NORMAL}"
+        echo -e "${BOLD}V2RayXL.app: $(pwd)/build/Release/V2RayXL.app${NORMAL}"
 
         echo -e "${BOLD}-- Start packing --${NORMAL}"
         isbeta=$(git describe --abbrev=0 --tags | grep beta)
         if [[ "$isbeta" != "" ]] 
         then 
-            xcodebuild -project V2RayXS.xcodeproj -target V2RayXS -configuration Debug -s
+            xcodebuild -project V2RayXL.xcodeproj -target V2RayXL -configuration Debug -s
             cd build/Debug/
         else
             cd build/Release/
         fi
 
-        zip -r V2RayXS.app.zip V2RayXS.app && mkdir -p ../out/ && rsync -a V2RayXS.app.zip "../out/V2RayXS_${useArch}.app.zip"
-        md5 -r "../out/V2RayXS_${useArch}.app.zip" | awk '{print "MD5="$1}' >> "../out/V2RayXS_${useArch}.app.zip.dgst"
-        shasum -a 1 "../out/V2RayXS_${useArch}.app.zip" | awk '{print "SHA1="$1}' >> "../out/V2RayXS_${useArch}.app.zip.dgst"
-        shasum -a 256 "../out/V2RayXS_${useArch}.app.zip" | awk '{print "SHA2-256="$1}' >> "../out/V2RayXS_${useArch}.app.zip.dgst"
+        zip -r V2RayXL.app.zip V2RayXL.app && mkdir -p ../out/ && rsync -a V2RayXL.app.zip "../out/V2RayXL_${useArch}.app.zip"
+        md5 -r "../out/V2RayXL_${useArch}.app.zip" | awk '{print "MD5="$1}' >> "../out/V2RayXL_${useArch}.app.zip.dgst"
+        shasum -a 1 "../out/V2RayXL_${useArch}.app.zip" | awk '{print "SHA1="$1}' >> "../out/V2RayXL_${useArch}.app.zip.dgst"
+        shasum -a 256 "../out/V2RayXL_${useArch}.app.zip" | awk '{print "SHA2-256="$1}' >> "../out/V2RayXL_${useArch}.app.zip.dgst"
         echo -e "${GREEN}-- Packaging succeeded --${NORMAL}"
         cd - >/dev/null 2>&1
 

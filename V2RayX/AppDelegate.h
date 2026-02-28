@@ -9,10 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "sysconf_version.h"
 #import "utilities.h"
-#define kV2RayXHelper @"/Library/Application Support/V2RayXS/v2rayx_sysconf"
+#define kV2RayXHelper @"/Library/Application Support/V2RayXL/v2rayxl_sysconf"
 #define kV2RayXSettingVersion 4
 
-#define webServerPort 8070
+#define webServerPort 8071
 
 typedef enum ProxyMode : NSInteger{
     pacMode,

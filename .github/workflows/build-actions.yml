@@ -1,4 +1,4 @@
-name: V2RayXS build actions
+name: V2RayXL build actions
 
 on:
   push:
@@ -29,9 +29,9 @@ jobs:
         run: |
           export SRCROOT=$(pwd)
           bash V2RayX/dlgeodat.sh
-      - name: Build V2RayXS for x86_64 Arch
+      - name: Build V2RayXL for x86_64 Arch
         run: /usr/bin/env bash build.sh x86_64
-      - name: Build V2RayXS for arm64 Arch
+      - name: Build V2RayXL for arm64 Arch
         run: /usr/bin/env bash build.sh arm64
       - name: Uploading assets...
         uses: softprops/action-gh-release@v2
@@ -43,7 +43,7 @@ jobs:
           prerelease: true
           append_body: true
           files: |
-            build/out/V2RayXS_x86_64.app.zip
-            build/out/V2RayXS_x86_64.app.zip.dgst
-            build/out/V2RayXS_arm64.app.zip
-            build/out/V2RayXS_arm64.app.zip.dgst
+            build/out/V2RayXL_x86_64.app.zip
+            build/out/V2RayXL_x86_64.app.zip.dgst
+            build/out/V2RayXL_arm64.app.zip
+            build/out/V2RayXL_arm64.app.zip.dgst

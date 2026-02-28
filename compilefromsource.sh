@@ -44,27 +44,27 @@ if [[ -n "$1" ]]; then
 fi
 
 XCODEBUILD_ARGS=(
-    -project V2RayXS.xcodeproj 
-    -target V2RayXS 
+    -project V2RayXL.xcodeproj 
+    -target V2RayXL 
     -configuration Release 
     ARCHS="${useArch}"
 )
 
 if [[ ! -f /Applications/Xcode.app/Contents/MacOS/Xcode ]]; then
-    echo -e "${RED}Xcode is needed to build V2RayXS, Please install Xcode from App Store!${NORMAL}"
-    echo -e "${RED}编译 V2RayXS 需要 Xcode.app，请从 App Store 里安装 Xcode.${NORMAL}"
+    echo -e "${RED}Xcode is needed to build V2RayXL, Please install Xcode from App Store!${NORMAL}"
+    echo -e "${RED}编译 V2RayXL 需要 Xcode.app，请从 App Store 里安装 Xcode.${NORMAL}"
 else
     echo -e "${BOLD}-- Downloading source code --${NORMAL}"
     echo -e "${BOLD}-- 正在下载源码 --${NORMAL}"
-    git clone --recursive https://github.com/tzmax/V2RayXS.git "V2RayXS${datetime}"
-    cd "V2RayXS${datetime}"
-    echo -e "${BOLD}-- Start building V2RayXS --${NORMAL}"
-    echo -e "${BOLD}-- 开始编译 V2RayXS --${NORMAL}"
+    git clone --recursive https://github.com/tzmax/V2RayXL.git "V2RayXL${datetime}"
+    cd "V2RayXL${datetime}"
+    echo -e "${BOLD}-- Start building V2RayXL --${NORMAL}"
+    echo -e "${BOLD}-- 开始编译 V2RayXL --${NORMAL}"
     xcodebuild "${XCODEBUILD_ARGS[@]}"
     if [[ $? == 0 ]]; then
         echo -e "${GREEN}-- Build succeeded --${NORMAL}"
         echo -e "${GREEN}-- 编译成功 --${NORMAL}"
-        echo -e "${BOLD}V2RayXS.app: $(pwd)/build/Release/V2RayXS.app${NORMAL}"
+        echo -e "${BOLD}V2RayXL.app: $(pwd)/build/Release/V2RayXL.app${NORMAL}"
     else
         echo -e "${RED}-- Build failed --${NORMAL}"
         echo -e "${RED}-- 编译失败 --${NORMAL}"

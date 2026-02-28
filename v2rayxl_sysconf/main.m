@@ -1,6 +1,6 @@
 //
 //  main.m
-//  v2rayx_sysconf
+//  v2rayxl_sysconf
 //
 //  Copyright © 2016年 Cenmrev. All rights reserved.
 //
@@ -14,7 +14,7 @@
 #import "route.h"
 
 
-#define INFO "v2rayx_sysconf\n the helper tool for V2RayX, modified from clowwindy's shadowsocks_sysconf.\nusage: v2rayx_sysconf [options]\noff\t turn off proxy\nauto\t auto proxy change\nglobal port \t global proxy at the specified port number\n"
+#define INFO "v2rayxl_sysconf\n the helper tool for V2RayX, modified from clowwindy's shadowsocks_sysconf.\nusage: v2rayxl_sysconf [options]\noff\t turn off proxy\nauto\t auto proxy change\nglobal port \t global proxy at the specified port number\n"
 
 //@interface AppDelegate : NSObject<NSXPCListenerDelegate> {}
 //@end
@@ -127,7 +127,7 @@ int main(int argc, const char * argv[])
                 // NSLog(@"tun fd is %@\n", ctl.tunName);
                 
                 // Process route
-                NSString* systemRouteBackupFilePath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/system_route_backup.plist", NSHomeDirectory()];
+                NSString* systemRouteBackupFilePath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/system_route_backup.plist", NSHomeDirectory()];
                 NSMutableDictionary* systemRouteBackup = [NSMutableDictionary dictionaryWithContentsOfURL:[NSURL fileURLWithPath: systemRouteBackupFilePath]];
                 NSString* DEFAULT_ROUTE_GATEWAY = @"DefaultRouteGateway";
                 if (systemRouteBackup == NULL) {
@@ -206,19 +206,19 @@ int main(int argc, const char * argv[])
                 return 1;
             }
             
-            SCPreferencesRef prefRef = SCPreferencesCreateWithAuthorization(nil, CFSTR("V2RayXS"), nil, authRef);
+            SCPreferencesRef prefRef = SCPreferencesCreateWithAuthorization(nil, CFSTR("V2RayXL"), nil, authRef);
             
             NSDictionary *sets = (__bridge NSDictionary *)SCPreferencesGetValue(prefRef, kSCPrefNetworkServices);
             
             NSDictionary* originalSets;
             if ([mode isEqualToString:@"save"]) {
-                [sets writeToURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/system_proxy_backup.plist",NSHomeDirectory()]] atomically:NO];
+                [sets writeToURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/system_proxy_backup.plist",NSHomeDirectory()]] atomically:NO];
                 return 0;
             }
             
             // 遍历系统中的网络设备列表，设置 AirPort 和 Ethernet 的代理
             if([mode isEqualToString:@"restore"]) {
-                originalSets = [NSDictionary dictionaryWithContentsOfURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/system_proxy_backup.plist",NSHomeDirectory()]]];
+                originalSets = [NSDictionary dictionaryWithContentsOfURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/system_proxy_backup.plist",NSHomeDirectory()]]];
             }
             for (NSString *key in [sets allKeys]) {
                 NSMutableDictionary *dict = [sets objectForKey:key];
@@ -240,7 +240,7 @@ int main(int argc, const char * argv[])
                     
                     if ([mode isEqualToString:@"auto"]) {
                         
-                        [proxies setObject:@"http://127.0.0.1:8070/proxy.pac" forKey:(NSString *)kCFNetworkProxiesProxyAutoConfigURLString];
+                        [proxies setObject:@"http://127.0.0.1:8071/proxy.pac" forKey:(NSString *)kCFNetworkProxiesProxyAutoConfigURLString];
                         [proxies setObject:[NSNumber numberWithInt:1] forKey:(NSString *)kCFNetworkProxiesProxyAutoConfigEnable];
                         
                     } else if ([mode isEqualToString:@"global"]) {

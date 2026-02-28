@@ -18,7 +18,7 @@
 		9504C0901C662CBF00352520 /* ConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9504C08F1C662CBF00352520 /* ConfigWindowController.m */; };
 		9504C0C11C662D9400352520 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9504C0C01C662D9400352520 /* libz.tbd */; };
 		9504C0C91C662DB500352520 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9504C0C81C662DB500352520 /* main.m */; };
-		9504C0CF1C662DE300352520 /* v2rayx_sysconf in Resources */ = {isa = PBXBuildFile; fileRef = 9504C0C61C662DB400352520 /* v2rayx_sysconf */; };
+		9504C0CF1C662DE300352520 /* v2rayxl_sysconf in Resources */ = {isa = PBXBuildFile; fileRef = 9504C0C61C662DB400352520 /* v2rayxl_sysconf */; };
 		9504C0D11C66373400352520 /* install_helper.sh in Resources */ = {isa = PBXBuildFile; fileRef = 9504C0D01C662E0800352520 /* install_helper.sh */; };
 		9504C0D41C66511B00352520 /* ServerProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 9504C0D31C66511B00352520 /* ServerProfile.m */; };
 		9565E28B1DB25C010082658C /* TransportWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9565E28A1DB25C010082658C /* TransportWindow.xib */; };
@@ -65,7 +65,7 @@
 			containerPortal = 9504C0701C662C3000352520 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9504C0C51C662DB400352520;
-			remoteInfo = v2rayx_sysconf;
+			remoteInfo = v2rayxl_sysconf;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -96,7 +96,7 @@
 		34AA955E299B5E7500E06D1B /* Tun2socks.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Tun2socks.xcframework; path = Librarys/Tun2socks.xcframework; sourceTree = "<group>"; };
 		34BB19C8297A7A9600331407 /* tun.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tun.m; sourceTree = "<group>"; };
 		34BB19CB297A8E6600331407 /* tun.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tun.h; sourceTree = "<group>"; };
-		9504C0781C662C3000352520 /* V2RayXS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V2RayXS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9504C0781C662C3000352520 /* V2RayXL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V2RayXL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9504C07B1C662C3000352520 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9504C07C1C662C3000352520 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9504C07F1C662C3000352520 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		9504C08E1C662CBF00352520 /* ConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigWindowController.h; sourceTree = "<group>"; };
 		9504C08F1C662CBF00352520 /* ConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigWindowController.m; sourceTree = "<group>"; };
 		9504C0C01C662D9400352520 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		9504C0C61C662DB400352520 /* v2rayx_sysconf */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = v2rayx_sysconf; sourceTree = BUILT_PRODUCTS_DIR; };
+		9504C0C61C662DB400352520 /* v2rayxl_sysconf */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = v2rayxl_sysconf; sourceTree = BUILT_PRODUCTS_DIR; };
 		9504C0C81C662DB500352520 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9504C0D01C662E0800352520 /* install_helper.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = install_helper.sh; sourceTree = "<group>"; };
 		9504C0D21C66511B00352520 /* ServerProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerProfile.h; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 				9D7DFE521EBEC947001FECBD /* jsonplist */,
 				95FCB2451C688BB20081B6FD /* Frameworks */,
 				9504C07A1C662C3000352520 /* V2RayX */,
-				9504C0C71C662DB500352520 /* v2rayx_sysconf */,
+				9504C0C71C662DB500352520 /* v2rayxl_sysconf */,
 				9504C0791C662C3000352520 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -219,8 +219,8 @@
 		9504C0791C662C3000352520 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9504C0781C662C3000352520 /* V2RayXS.app */,
-				9504C0C61C662DB400352520 /* v2rayx_sysconf */,
+				9504C0781C662C3000352520 /* V2RayXL.app */,
+				9504C0C61C662DB400352520 /* v2rayxl_sysconf */,
 				9D7DFE511EBEC947001FECBD /* jsonplist */,
 			);
 			name = Products;
@@ -276,7 +276,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9504C0C71C662DB500352520 /* v2rayx_sysconf */ = {
+		9504C0C71C662DB500352520 /* v2rayxl_sysconf */ = {
 			isa = PBXGroup;
 			children = (
 				9504C0C81C662DB500352520 /* main.m */,
@@ -286,7 +286,7 @@
 				34315F9D297DB3A9000DDA2D /* route.m */,
 				34315F9F297DB3BC000DDA2D /* route.h */,
 			);
-			path = v2rayx_sysconf;
+			path = v2rayxl_sysconf;
 			sourceTree = "<group>";
 		};
 		9577E1921C6B065D00093BD3 /* GCDWebServer */ = {
@@ -400,9 +400,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9504C0771C662C3000352520 /* V2RayXS */ = {
+		9504C0771C662C3000352520 /* V2RayXL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9504C0891C662C3000352520 /* Build configuration list for PBXNativeTarget "V2RayXS" */;
+			buildConfigurationList = 9504C0891C662C3000352520 /* Build configuration list for PBXNativeTarget "V2RayXL" */;
 			buildPhases = (
 				9504C0741C662C3000352520 /* Sources */,
 				9504C0751C662C3000352520 /* Frameworks */,
@@ -415,14 +415,14 @@
 			dependencies = (
 				9504C0CE1C662DC500352520 /* PBXTargetDependency */,
 			);
-			name = V2RayXS;
+			name = V2RayXL;
 			productName = V2RayX;
-			productReference = 9504C0781C662C3000352520 /* V2RayXS.app */;
+			productReference = 9504C0781C662C3000352520 /* V2RayXL.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9504C0C51C662DB400352520 /* v2rayx_sysconf */ = {
+		9504C0C51C662DB400352520 /* v2rayxl_sysconf */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9504C0CA1C662DB500352520 /* Build configuration list for PBXNativeTarget "v2rayx_sysconf" */;
+			buildConfigurationList = 9504C0CA1C662DB500352520 /* Build configuration list for PBXNativeTarget "v2rayxl_sysconf" */;
 			buildPhases = (
 				9504C0C21C662DB400352520 /* Sources */,
 				9504C0C31C662DB400352520 /* Frameworks */,
@@ -432,9 +432,9 @@
 			);
 			dependencies = (
 			);
-			name = v2rayx_sysconf;
-			productName = v2rayx_sysconf;
-			productReference = 9504C0C61C662DB400352520 /* v2rayx_sysconf */;
+			name = v2rayxl_sysconf;
+			productName = v2rayxl_sysconf;
+			productReference = 9504C0C61C662DB400352520 /* v2rayxl_sysconf */;
 			productType = "com.apple.product-type.tool";
 		};
 		9D7DFE501EBEC947001FECBD /* jsonplist */ = {
@@ -475,7 +475,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9504C0731C662C3000352520 /* Build configuration list for PBXProject "V2RayXS" */;
+			buildConfigurationList = 9504C0731C662C3000352520 /* Build configuration list for PBXProject "V2RayXL" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -489,8 +489,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9504C0771C662C3000352520 /* V2RayXS */,
-				9504C0C51C662DB400352520 /* v2rayx_sysconf */,
+				9504C0771C662C3000352520 /* V2RayXL */,
+				9504C0C51C662DB400352520 /* v2rayxl_sysconf */,
 				9D7DFE501EBEC947001FECBD /* jsonplist */,
 			);
 		};
@@ -511,7 +511,7 @@
 				9DB4FE951F205BEB00CCEE5F /* config-sample.plist in Resources */,
 				95E524CB1C674CC80008BB12 /* simple.pac in Resources */,
 				9504C0D11C66373400352520 /* install_helper.sh in Resources */,
-				9504C0CF1C662DE300352520 /* v2rayx_sysconf in Resources */,
+				9504C0CF1C662DE300352520 /* v2rayxl_sysconf in Resources */,
 				9DA4A84120C14178000FF35D /* tcp_http_header_example.txt in Resources */,
 				9504C0821C662C3000352520 /* Assets.xcassets in Resources */,
 				9D7109611E0F43BD008A6362 /* Credits.rtf in Resources */,
@@ -611,7 +611,7 @@
 /* Begin PBXTargetDependency section */
 		9504C0CE1C662DC500352520 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9504C0C51C662DB400352520 /* v2rayx_sysconf */;
+			target = 9504C0C51C662DB400352520 /* v2rayxl_sysconf */;
 			targetProxy = 9504C0CD1C662DC500352520 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -798,7 +798,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.5.10;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = cenmrev.V2RayXS;
+				PRODUCT_BUNDLE_IDENTIFIER = cenmrev.V2RayXL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -822,7 +822,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.5.10;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = cenmrev.V2RayXS;
+				PRODUCT_BUNDLE_IDENTIFIER = cenmrev.V2RayXL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -833,7 +833,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/v2rayx_sysconf",
+					"$(PROJECT_DIR)/v2rayxl_sysconf",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -846,7 +846,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/v2rayx_sysconf",
+					"$(PROJECT_DIR)/v2rayxl_sysconf",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -880,7 +880,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9504C0731C662C3000352520 /* Build configuration list for PBXProject "V2RayXS" */ = {
+		9504C0731C662C3000352520 /* Build configuration list for PBXProject "V2RayXL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9504C0871C662C3000352520 /* Debug */,
@@ -889,7 +889,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9504C0891C662C3000352520 /* Build configuration list for PBXNativeTarget "V2RayXS" */ = {
+		9504C0891C662C3000352520 /* Build configuration list for PBXNativeTarget "V2RayXL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9504C08A1C662C3000352520 /* Debug */,
@@ -898,7 +898,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9504C0CA1C662DB500352520 /* Build configuration list for PBXNativeTarget "v2rayx_sysconf" */ = {
+		9504C0CA1C662DB500352520 /* Build configuration list for PBXNativeTarget "v2rayxl_sysconf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9504C0CB1C662DB500352520 /* Debug */,

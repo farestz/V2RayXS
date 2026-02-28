@@ -68,7 +68,7 @@ static AppDelegate *appDelegate;
     
     // prepare directory
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString *pacDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/pac", NSHomeDirectory()];
+    NSString *pacDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/pac", NSHomeDirectory()];
     //create application support directory and pac directory
     if (![fileManager fileExistsAtPath:pacDir]) {
         [fileManager createDirectoryAtPath:pacDir withIntermediateDirectories:YES attributes:nil error:nil];
@@ -84,7 +84,7 @@ static AppDelegate *appDelegate;
     NSNumber* setingVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"setingVersion"];
     if(setingVersion == nil || [setingVersion integerValue] != kV2RayXSettingVersion) {
         NSAlert *noServerAlert = [[NSAlert alloc] init];
-        [noServerAlert setMessageText:@"If you are running V2RayXS for the first time, ignore this message. \nSorry, unknown settings!\nAll V2RayXS settings will be reset."];
+        [noServerAlert setMessageText:@"If you are running V2RayXL for the first time, ignore this message. \nSorry, unknown settings!\nAll V2RayXL settings will be reset."];
         [noServerAlert runModal];
         [self writeDefaultSettings]; //explicitly write default settings to user defaults file
     }
@@ -93,10 +93,10 @@ static AppDelegate *appDelegate;
     [self addObserver:self forKeyPath:@"selectedPacFileName" options:NSKeyValueObservingOptionNew context:nil];
     
     // create a serial queue used for NSTask operations
-    taskQueue = dispatch_queue_create("cenmrev.v2rayxs.nstask", DISPATCH_QUEUE_CONCURRENT);
+    taskQueue = dispatch_queue_create("cenmrev.v2rayxl.nstask", DISPATCH_QUEUE_CONCURRENT);
     // create a loop to run core
     coreLoopSemaphore = dispatch_semaphore_create(0);
-    coreLoopQueue = dispatch_queue_create("cenmrev.v2rayxs.coreloop", DISPATCH_QUEUE_SERIAL);
+    coreLoopQueue = dispatch_queue_create("cenmrev.v2rayxl.coreloop", DISPATCH_QUEUE_SERIAL);
     
     
     dispatch_async(coreLoopQueue, ^{
@@ -167,7 +167,7 @@ static AppDelegate *appDelegate;
     self.encryptionKey = @"";
     if (_enableEncryption && ([profiles count] > 0 || [_subscriptions count] > 0)) {
         NSUserNotification* notification = [[NSUserNotification alloc] init];
-        notification.identifier = [NSString stringWithFormat:@"cenmrev.v2rayxs.passwork.%@", [NSUUID UUID]];
+        notification.identifier = [NSString stringWithFormat:@"cenmrev.v2rayxl.passwork.%@", [NSUUID UUID]];
         notification.title = @"Input Password";
         notification.informativeText = @"input your password to continue";
         notification.soundName = NSUserNotificationDefaultSoundName;
@@ -258,7 +258,7 @@ static AppDelegate *appDelegate;
     NSAlert *installAlert = [[NSAlert alloc] init];
     [installAlert addButtonWithTitle:@"Install"];
     [installAlert addButtonWithTitle:@"Quit"];
-    [installAlert setMessageText:@"V2RayXS needs to install a small tool to /Library/Application Support/V2RayXS/ with administrator privileges to set system proxy quickly.\nOtherwise you need to type in the administrator password every time you change system proxy through V2RayXS."];
+    [installAlert setMessageText:@"V2RayXL needs to install a small tool to /Library/Application Support/V2RayXL/ with administrator privileges to set system proxy quickly.\nOtherwise you need to type in the administrator password every time you change system proxy through V2RayXL."];
     if ([installAlert runModal] == NSAlertFirstButtonReturn) {
         NSLog(@"start install");
         NSString *helperPath = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"install_helper.sh"];
@@ -315,11 +315,11 @@ static AppDelegate *appDelegate;
 }
 
 - (IBAction)openReleasePage:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/tzmax/V2RayXS/releases/latest"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/farestz/V2RayXS/releases/latest"]];
 }
 
 - (IBAction)checkUpgrade:(id)sender {
-    NSURL* url =[NSURL URLWithString:@"https://api.github.com/repos/tzmax/v2rayxs/releases/latest"];
+    NSURL* url =[NSURL URLWithString:@"https://api.github.com/repos/farestz/V2RayXS/releases/latest"];
     NSURLSessionDataTask* task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         @try {
             NSDictionary* d = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -365,8 +365,8 @@ static AppDelegate *appDelegate;
     
     _enableEncryption = [nilCoalescing([defaults objectForKey:@"enableEncryption"], @(NO)) boolValue];
     logLevel = nilCoalescing([defaults objectForKey:@"logLevel"], @"none");
-    localPort = [nilCoalescing([defaults objectForKey:@"localPort"], @1081) integerValue]; //use 1081 as default local port
-    httpPort = [nilCoalescing([defaults objectForKey:@"httpPort"], @8001) integerValue]; //use 8001 as default local http port
+    localPort = [nilCoalescing([defaults objectForKey:@"localPort"], @1082) integerValue]; //use 1082 as default local port
+    httpPort = [nilCoalescing([defaults objectForKey:@"httpPort"], @8002) integerValue]; //use 8002 as default local http port
     udpSupport = [nilCoalescing([defaults objectForKey:@"udpSupport"], @(NO)) boolValue];// do not support udp as default
     shareOverLan = [nilCoalescing([defaults objectForKey:@"shareOverLan"],@(NO)) boolValue];
     dnsString = nilCoalescing([defaults objectForKey:@"dnsString"], @"localhost");
@@ -429,8 +429,8 @@ static AppDelegate *appDelegate;
               },
       @"enableEncryption":@(NO),
       @"logLevel": @"none",
-      @"localPort": [NSNumber numberWithInteger:1081],
-      @"httpPort": [NSNumber numberWithInteger:8001],
+      @"localPort": [NSNumber numberWithInteger:1082],
+      @"httpPort": [NSNumber numberWithInteger:8002],
       @"udpSupport": [NSNumber numberWithBool:NO],
       @"shareOverLan": [NSNumber numberWithBool:NO],
       @"dnsString": @"localhost",
@@ -447,7 +447,7 @@ static AppDelegate *appDelegate;
 }
 
 - (NSData*) pacData {
-    return [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/pac/%@",NSHomeDirectory(), selectedPacFileName]];
+    return [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/pac/%@",NSHomeDirectory(), selectedPacFileName]];
 }
 
 - (void)saveAppStatus {
@@ -519,7 +519,7 @@ static AppDelegate *appDelegate;
     //unload v2ray
     //runCommandLine(@"/bin/launchctl", @[@"unload", plistPath]);
     [self unloadV2ray];
-    NSLog(@"V2RayXS quiting, Xray core unloaded.");
+    NSLog(@"V2RayXL quiting, Xray core unloaded.");
     //remove log file
     [[NSFileManager defaultManager] removeItemAtPath:logDirPath error:nil];
     //save application status
@@ -545,9 +545,9 @@ static AppDelegate *appDelegate;
 // or 2. proxy state was on and now is turned off, and the proxy mode is non-manual => happens when didChangeStatus
 
 -(void)backupSystemProxy {
-    SCPreferencesRef prefRef = SCPreferencesCreate(nil, CFSTR("V2RayXS"), nil);
+    SCPreferencesRef prefRef = SCPreferencesCreate(nil, CFSTR("V2RayXL"), nil);
     NSDictionary* sets = (__bridge NSDictionary *)SCPreferencesGetValue(prefRef, kSCPrefNetworkServices);
-    [sets writeToURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/system_proxy_backup.plist",NSHomeDirectory()]] atomically:NO];
+    [sets writeToURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/system_proxy_backup.plist",NSHomeDirectory()]] atomically:NO];
 }
 
 -(void)restoreSystemProxy {
@@ -655,7 +655,7 @@ static AppDelegate *appDelegate;
 - (void)updatePacMenuList {
     NSLog(@"updatePacMenuList");
     [_pacListMenu removeAllItems];
-    NSString *pacDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/pac", NSHomeDirectory()];
+    NSString *pacDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/pac", NSHomeDirectory()];
     
     NSFileManager *manager = [NSFileManager defaultManager];
     NSArray *allPath =[manager subpathsAtPath:pacDir];
@@ -678,7 +678,7 @@ static AppDelegate *appDelegate;
 }
 
 - (IBAction)editPac:(id)sender {
-    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/pac/%@",NSHomeDirectory(), selectedPacFileName]]]];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/pac/%@",NSHomeDirectory(), selectedPacFileName]]]];
 }
 
 - (IBAction)resetPac:(id)sender {
@@ -689,7 +689,7 @@ static AppDelegate *appDelegate;
     NSModalResponse response = [resetAlert runModal];
     if(response == NSAlertFirstButtonReturn) {
         NSString* simplePac = [[NSBundle mainBundle] pathForResource:@"simple" ofType:@"pac"];
-        NSString* pacPath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/pac/%@",NSHomeDirectory(), selectedPacFileName];
+        NSString* pacPath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/pac/%@",NSHomeDirectory(), selectedPacFileName];
         if ([[NSFileManager defaultManager] isWritableFileAtPath:pacPath]) {
             [[NSData dataWithContentsOfFile:simplePac] writeToFile:pacPath atomically:YES];
         } else {
@@ -945,7 +945,7 @@ static AppDelegate *appDelegate;
     backup[@"outbounds"] = self.profiles;
     backup[@"routings"] = self.routingRuleSets;
     NSData* backupData = [NSJSONSerialization dataWithJSONObject:backup options:NSJSONWritingPrettyPrinted error:nil];
-    NSString* backupPath = [NSString stringWithFormat:@"%@/v2rayxs_backup_%@.json", NSHomeDirectory(), dateString];
+    NSString* backupPath = [NSString stringWithFormat:@"%@/v2rayxl_backup_%@.json", NSHomeDirectory(), dateString];
     
     [backupData writeToFile:backupPath atomically:YES];
     [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:@[[NSURL fileURLWithPath:backupPath]]];
@@ -1078,9 +1078,9 @@ static AppDelegate *appDelegate;
 -(NSString*)getV2rayPath {
     NSString* defaultV2ray = [NSString stringWithFormat:@"%@/xray", [[NSBundle mainBundle] resourcePath]];
     NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString* cusV2ray = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/xray-core/xray",NSHomeDirectory()];
+    NSString* cusV2ray = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/xray",NSHomeDirectory()];
     for (NSString* binary in @[@"xray"]) {
-        NSString* fullpath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/xray-core/%@",NSHomeDirectory(), binary];
+        NSString* fullpath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/%@",NSHomeDirectory(), binary];
         BOOL isDir = YES;
         if (![fileManager fileExistsAtPath:fullpath isDirectory:&isDir] || isDir || ![fileManager setAttributes:@{NSFilePosixPermissions: [NSNumber numberWithShort:0777]} ofItemAtPath:fullpath error:nil]) {
             return defaultV2ray;
@@ -1092,8 +1092,8 @@ static AppDelegate *appDelegate;
 
 -(NSString*)getGeoAssetPath {
     NSFileManager *fm = [NSFileManager defaultManager];
-    // Priority 1: user-downloaded geo files in ~/Library/Application Support/V2RayXS/
-    NSString *appSupportDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS", NSHomeDirectory()];
+    // Priority 1: user-downloaded geo files in ~/Library/Application Support/V2RayXL/
+    NSString *appSupportDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL", NSHomeDirectory()];
     BOOL allExist = YES;
     for (NSString *geoFile in @[@"geoip.dat", @"geosite.dat"]) {
         BOOL isDir = YES;
@@ -1105,7 +1105,7 @@ static AppDelegate *appDelegate;
     }
     if (allExist) return appSupportDir;
     // Priority 2: custom xray-core directory (backward compat)
-    NSString *cusDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/xray-core", NSHomeDirectory()];
+    NSString *cusDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core", NSHomeDirectory()];
     allExist = YES;
     for (NSString *geoFile in @[@"geoip.dat", @"geosite.dat"]) {
         BOOL isDir = YES;
@@ -1219,7 +1219,7 @@ int runCommandLine(NSString* launchPath, NSArray* arguments) {
         if (selectedPacFileName == nil || selectedPacFileName.length == 0) {
             return;
         }
-        NSString* pacFullPath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/pac/%@",NSHomeDirectory(), selectedPacFileName];
+        NSString* pacFullPath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/pac/%@",NSHomeDirectory(), selectedPacFileName];
         if (![[NSFileManager defaultManager] fileExistsAtPath:pacFullPath]) {
             NSString* simplePac = [[NSBundle mainBundle] pathForResource:@"simple" ofType:@"pac"];
             [[NSFileManager defaultManager] copyItemAtPath:simplePac toPath:pacFullPath error:nil];

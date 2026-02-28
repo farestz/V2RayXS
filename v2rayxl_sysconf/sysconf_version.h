@@ -8,6 +8,6 @@
 #define sysconf_version_h
 
 
-#define VERSION @"v2rayx_sysconf 1.5.1"
+#define VERSION @"v2rayxl_sysconf 1.5.1"
 
 #endif /* sysconf_version_h */
