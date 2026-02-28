@@ -11,12 +11,23 @@
 #import "TransportWindowController.h"
 #import "AdvancedWindowController.h"
 #import "ConfigImporter.h"
+#import <CommonCrypto/CommonDigest.h>
+
+static NSString * const kGeoBaseURL = @"https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download";
 
 @interface ConfigWindowController ()
 
 @property (strong) TransportWindowController* transportWindowController;
 @property (strong) AdvancedWindowController* advancedWindowController;
 @property (strong) NSPopover* popover;
+
+// Geo update state
+@property (strong) NSURLSessionDownloadTask *geoDownloadTask;
+@property (strong) NSWindow *geoProgressSheet;
+@property (strong) NSTextField *geoStatusLabel;
+@property (strong) NSProgressIndicator *geoProgressIndicator;
+@property (strong) NSString *geoTempDir;
+@property (assign) BOOL geoDownloadCancelled;
 @end
 
 @implementation ConfigWindowController
@@ -476,6 +487,225 @@
 
 - (IBAction)showLog:(id)sender {
     [_appDelegate viewLog:sender];
+}
+
+#pragma mark - Geo File Update
+
++ (NSString *)sha256OfFileAtPath:(NSString *)path {
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    if (!data) return nil;
+    unsigned char hash[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(data.bytes, (CC_LONG)data.length, hash);
+    NSMutableString *hex = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
+    for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++)
+        [hex appendFormat:@"%02x", hash[i]];
+    return hex;
+}
+
+- (IBAction)updateGeoFiles:(id)sender {
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:@"Update Geo Files"];
+    [alert setInformativeText:@"Download updated geoip.dat and geosite.dat from Loyalsoldier/v2ray-rules-dat?\n\nFiles will be verified with SHA256 before replacing existing ones."];
+    [alert addButtonWithTitle:@"Update"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSAlertFirstButtonReturn) {
+            [self startGeoDownload];
+        }
+    }];
+}
+
+- (void)startGeoDownload {
+    self.geoDownloadCancelled = NO;
+    self.geoTempDir = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
+    NSError *err = nil;
+    [[NSFileManager defaultManager] createDirectoryAtPath:self.geoTempDir withIntermediateDirectories:YES attributes:nil error:&err];
+    if (err) {
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Failed to create temp directory"];
+        [alert setInformativeText:err.localizedDescription];
+        [alert runModal];
+        return;
+    }
+
+    // Build progress sheet
+    NSWindow *sheet = [[NSWindow alloc] initWithContentRect:NSMakeRect(0, 0, 380, 110)
+                                                  styleMask:NSWindowStyleMaskTitled
+                                                    backing:NSBackingStoreBuffered
+                                                      defer:YES];
+    sheet.title = @"Updating Geo Files";
+    NSView *cv = sheet.contentView;
+
+    NSTextField *label = [NSTextField labelWithString:@"Preparing..."];
+    label.frame = NSMakeRect(20, 72, 340, 17);
+    [cv addSubview:label];
+
+    NSProgressIndicator *indicator = [[NSProgressIndicator alloc] initWithFrame:NSMakeRect(20, 46, 340, 20)];
+    indicator.style = NSProgressIndicatorStyleBar;
+    indicator.indeterminate = YES;
+    [indicator startAnimation:nil];
+    [cv addSubview:indicator];
+
+    NSButton *cancelBtn = [[NSButton alloc] initWithFrame:NSMakeRect(270, 10, 90, 28)];
+    cancelBtn.bezelStyle = NSBezelStyleRounded;
+    cancelBtn.title = @"Cancel";
+    cancelBtn.target = self;
+    cancelBtn.action = @selector(cancelGeoDownload:);
+    [cv addSubview:cancelBtn];
+
+    self.geoProgressSheet = sheet;
+    self.geoStatusLabel = label;
+    self.geoProgressIndicator = indicator;
+    self.updateGeoButton.enabled = NO;
+
+    [self.window beginSheet:sheet completionHandler:^(NSModalResponse __unused rc) {
+        self.geoProgressSheet = nil;
+        self.geoStatusLabel = nil;
+        self.geoProgressIndicator = nil;
+    }];
+
+    [self downloadGeoFileAtIndex:0 fromList:@[@"geoip.dat", @"geosite.dat"]];
+}
+
+- (void)downloadGeoFileAtIndex:(NSUInteger)index fromList:(NSArray<NSString *> *)files {
+    if (self.geoDownloadCancelled) return;
+
+    if (index >= files.count) {
+        // All files downloaded and verified — atomic replace
+        [self atomicReplaceGeoFilesFromTempDir:self.geoTempDir fileList:files];
+        return;
+    }
+
+    NSString *fileName = files[index];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.geoStatusLabel.stringValue = [NSString stringWithFormat:@"Downloading %@ (%lu/%lu)...", fileName, (unsigned long)(index + 1), (unsigned long)files.count];
+    });
+
+    NSURL *fileURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", kGeoBaseURL, fileName]];
+    __weak typeof(self) weakSelf = self;
+
+    NSURLSessionDownloadTask *task = [[NSURLSession sharedSession] downloadTaskWithURL:fileURL completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        typeof(self) self = weakSelf;
+        if (!self || self.geoDownloadCancelled) return;
+
+        if (error) {
+            [self failWithMessage:[NSString stringWithFormat:@"Failed to download %@: %@", fileName, error.localizedDescription]];
+            return;
+        }
+        NSHTTPURLResponse *http = (NSHTTPURLResponse *)response;
+        if (http.statusCode != 200) {
+            [self failWithMessage:[NSString stringWithFormat:@"Failed to download %@: HTTP %ld", fileName, (long)http.statusCode]];
+            return;
+        }
+
+        // Move data file to temp dir
+        NSString *destPath = [self.geoTempDir stringByAppendingPathComponent:fileName];
+        NSError *moveErr = nil;
+        [[NSFileManager defaultManager] moveItemAtURL:location toURL:[NSURL fileURLWithPath:destPath] error:&moveErr];
+        if (moveErr) {
+            [self failWithMessage:[NSString stringWithFormat:@"Failed to save %@: %@", fileName, moveErr.localizedDescription]];
+            return;
+        }
+
+        // Now download checksum file
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.geoStatusLabel.stringValue = [NSString stringWithFormat:@"Verifying %@...", fileName];
+        });
+
+        NSURL *checksumURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@.sha256sum", kGeoBaseURL, fileName]];
+        NSURLSessionDataTask *checksumTask = [[NSURLSession sharedSession] dataTaskWithURL:checksumURL completionHandler:^(NSData *data, NSURLResponse *csResponse, NSError *csError) {
+            if (!self || self.geoDownloadCancelled) return;
+            if (csError || !data) {
+                [self failWithMessage:[NSString stringWithFormat:@"Failed to download checksum for %@: %@", fileName, csError.localizedDescription]];
+                return;
+            }
+            NSHTTPURLResponse *csHttp = (NSHTTPURLResponse *)csResponse;
+            if (csHttp.statusCode != 200) {
+                [self failWithMessage:[NSString stringWithFormat:@"Failed to download checksum for %@: HTTP %ld", fileName, (long)csHttp.statusCode]];
+                return;
+            }
+
+            NSString *checksumStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            // Format: "<hex64>  <filename>\n"
+            NSString *expectedHash = [[checksumStr componentsSeparatedByString:@" "][0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *actualHash = [ConfigWindowController sha256OfFileAtPath:destPath];
+
+            if (!actualHash || ![actualHash isEqualToString:expectedHash]) {
+                [self failWithMessage:[NSString stringWithFormat:@"Checksum mismatch for %@.\nExpected: %@\nGot: %@", fileName, expectedHash, actualHash]];
+                return;
+            }
+
+            // Verified — proceed to next file
+            [self downloadGeoFileAtIndex:index + 1 fromList:files];
+        }];
+        [checksumTask resume];
+    }];
+
+    self.geoDownloadTask = task;
+    [task resume];
+}
+
+- (void)atomicReplaceGeoFilesFromTempDir:(NSString *)tempDir fileList:(NSArray<NSString *> *)files {
+    NSString *destDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS", NSHomeDirectory()];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    [fm createDirectoryAtPath:destDir withIntermediateDirectories:YES attributes:nil error:nil];
+
+    NSMutableArray *moved = [NSMutableArray array];
+    NSError *moveErr = nil;
+
+    for (NSString *fileName in files) {
+        NSString *src = [tempDir stringByAppendingPathComponent:fileName];
+        NSString *dst = [destDir stringByAppendingPathComponent:fileName];
+        [fm removeItemAtPath:dst error:nil];
+        if (![fm moveItemAtPath:src toPath:dst error:&moveErr]) {
+            // Rollback already-moved files
+            for (NSString *movedFile in moved)
+                [fm removeItemAtPath:[destDir stringByAppendingPathComponent:movedFile] error:nil];
+            [self failWithMessage:[NSString stringWithFormat:@"Failed to install %@: %@", fileName, moveErr.localizedDescription]];
+            return;
+        }
+        [moved addObject:fileName];
+    }
+
+    [fm removeItemAtPath:tempDir error:nil];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.window endSheet:self.geoProgressSheet returnCode:NSModalResponseOK];
+        self.updateGeoButton.enabled = YES;
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Geo Files Updated"];
+        [alert setInformativeText:@"geoip.dat and geosite.dat were updated successfully. Xray-core will be restarted if running."];
+        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse __unused rc) {}];
+        [self.appDelegate restartCoreIfRunning];
+    });
+}
+
+- (void)cancelGeoDownload:(id)sender {
+    self.geoDownloadCancelled = YES;
+    [self.geoDownloadTask cancel];
+    NSString *tempDir = self.geoTempDir;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.geoProgressSheet)
+            [self.window endSheet:self.geoProgressSheet returnCode:NSModalResponseCancel];
+        self.updateGeoButton.enabled = YES;
+        if (tempDir)
+            [[NSFileManager defaultManager] removeItemAtPath:tempDir error:nil];
+    });
+}
+
+- (void)failWithMessage:(NSString *)message {
+    NSString *tempDir = self.geoTempDir;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.geoProgressSheet)
+            [self.window endSheet:self.geoProgressSheet returnCode:NSModalResponseCancel];
+        self.updateGeoButton.enabled = YES;
+        if (tempDir)
+            [[NSFileManager defaultManager] removeItemAtPath:tempDir error:nil];
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Update Failed"];
+        [alert setInformativeText:message];
+        [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse __unused rc) {}];
+    });
 }
 
 @end

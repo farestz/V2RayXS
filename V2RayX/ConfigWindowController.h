@@ -18,6 +18,8 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)okSave:(id)sender;
 @property (weak) IBOutlet NSButton *importButton;
+@property (weak) IBOutlet NSButton *updateGeoButton;
+- (IBAction)updateGeoFiles:(id)sender;
 @property (weak) IBOutlet NSTableView *profileTable;
 @property (weak) IBOutlet NSSegmentedControl *addRemoveButton;
 @property (weak) IBOutlet NSView *importResultView;

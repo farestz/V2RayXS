@@ -14,6 +14,7 @@
                 <outlet property="globalTransportButton" destination="L0C-0n-d5i" id="GRx-qD-mvf"/>
                 <outlet property="httpPortField" destination="aVm-xn-0cZ" id="9lo-hP-jbp"/>
                 <outlet property="importButton" destination="ubu-QM-gwn" id="6cO-zl-OCm"/>
+                <outlet property="updateGeoButton" destination="UGF-eo-GEO" id="UGO-eo-GEO"/>
                 <outlet property="importFromJsonMenu" destination="R79-z8-mxK" id="Crb-5l-C1R"/>
                 <outlet property="importMessageField" destination="fLh-mA-BaL" id="lxK-xd-u7p"/>
                 <outlet property="importResultView" destination="jV2-ec-trE" id="EUP-5w-3mr"/>
@@ -567,7 +568,7 @@
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3p9-Ay-GbW">
-                        <rect key="frame" x="425" y="70" width="112" height="32"/>
+                        <rect key="frame" x="265" y="70" width="112" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Advanced..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MOG-35-OP1">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -575,6 +576,17 @@
                         </buttonCell>
                         <connections>
                             <action selector="showAdvancedWindow:" target="-2" id="1El-Bd-DKf"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGF-eo-GEO">
+                        <rect key="frame" x="425" y="70" width="116" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Update Geo..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UGC-eo-GEO">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateGeoFiles:" target="-2" id="UGA-eo-GEO"/>
                         </connections>
                     </button>
                     <button toolTip="Restart V2Ray and connected to the selected server above" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnz-Bw-lGu">
@@ -634,7 +646,7 @@ Gw
                         </connections>
                     </segmentedControl>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubu-QM-gwn">
-                        <rect key="frame" x="329" y="70" width="98" height="32"/>
+                        <rect key="frame" x="169" y="70" width="98" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Import..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Vd-cX-tz4">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

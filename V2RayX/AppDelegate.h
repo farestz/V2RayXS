@@ -80,6 +80,8 @@ int runCommandLine(NSString* launchPath, NSArray* arguments);
 - (void)saveConfigInfo;
 
 -(NSString*)getV2rayPath;
+-(NSString*)getGeoAssetPath;
+- (void)restartCoreIfRunning;
 - (NSString*)logDirPath;
 
 @property (weak) IBOutlet NSMenuItem *updateServerItem;

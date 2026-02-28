@@ -109,6 +109,9 @@ static AppDelegate *appDelegate;
                 [self->coreProcess setLaunchPath:[self getV2rayPath]];
             }
             [self->coreProcess setArguments:@[@"-config", @"stdin:"]];
+            NSMutableDictionary *coreEnv = [[[NSProcessInfo processInfo] environment] mutableCopy];
+            coreEnv[@"XRAY_LOCATION_ASSET"] = [self getGeoAssetPath];
+            [self->coreProcess setEnvironment:coreEnv];
             NSPipe* stdinpipe = [NSPipe pipe];
             [self->coreProcess setStandardInput:stdinpipe];
             NSData* configData = [NSJSONSerialization dataWithJSONObject:[self generateConfigFile] options:0 error:nil];
@@ -1083,15 +1086,44 @@ static AppDelegate *appDelegate;
             return defaultV2ray;
         }
     }
-    for (NSString* data in @[@"geoip.dat", @"geosite.dat"]) {
-        NSString* fullpath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/xray-core/%@",NSHomeDirectory(), data];
-        BOOL isDir = YES;
-        if (![fileManager fileExistsAtPath:fullpath isDirectory:&isDir] || isDir ) {
-            return defaultV2ray;
-        }
-    }
     return cusV2ray;
     
+}
+
+-(NSString*)getGeoAssetPath {
+    NSFileManager *fm = [NSFileManager defaultManager];
+    // Priority 1: user-downloaded geo files in ~/Library/Application Support/V2RayXS/
+    NSString *appSupportDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS", NSHomeDirectory()];
+    BOOL allExist = YES;
+    for (NSString *geoFile in @[@"geoip.dat", @"geosite.dat"]) {
+        BOOL isDir = YES;
+        NSString *path = [appSupportDir stringByAppendingPathComponent:geoFile];
+        if (![fm fileExistsAtPath:path isDirectory:&isDir] || isDir) {
+            allExist = NO;
+            break;
+        }
+    }
+    if (allExist) return appSupportDir;
+    // Priority 2: custom xray-core directory (backward compat)
+    NSString *cusDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXS/xray-core", NSHomeDirectory()];
+    allExist = YES;
+    for (NSString *geoFile in @[@"geoip.dat", @"geosite.dat"]) {
+        BOOL isDir = YES;
+        NSString *path = [cusDir stringByAppendingPathComponent:geoFile];
+        if (![fm fileExistsAtPath:path isDirectory:&isDir] || isDir) {
+            allExist = NO;
+            break;
+        }
+    }
+    if (allExist) return cusDir;
+    // Priority 3: bundled in app Resources
+    return [[NSBundle mainBundle] resourcePath];
+}
+
+- (void)restartCoreIfRunning {
+    if (proxyState) {
+        [self coreConfigDidChange:self];
+    }
 }
 
 - (IBAction)authorizeV2sys:(id)sender {
