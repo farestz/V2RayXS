@@ -1,12 +1,17 @@
 # V2RayXS: A simple GUI for Xray on macOS
 
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tzmax/V2RayXS)](https://github.com/tzmax/V2RayXS/releases)
-![GitHub release (latest by date)](https://img.shields.io/github/downloads/tzmax/V2RayXS/latest/total)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tzmax/V2RayXS/build-actions.yml)](https://github.com/tzmax/V2RayXS/actions/workflows/build-actions.yml)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/farestz/V2RayXS)](https://github.com/farestz/V2RayXS/releases)
+![GitHub release (latest by date)](https://img.shields.io/github/downloads/farestz/V2RayXS/latest/total)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/farestz/V2RayXS/build-actions.yml)](https://github.com/farestz/V2RayXS/actions/workflows/build-actions.yml)
 
 **Attention**: If you want to use v2ray-core version please install the original project. <https://github.com/Cenmrev/V2RayX>
 
-> This repo is based on the [Cenmrev/V2RayX](https://github.com/Cenmrev/V2RayX) project for maintenance and update, uses the [Xray-core](https://github.com/XTLS/Xray-core) implementation to support the VLESS and XTLS protocol, and the copyright of the application belongs to the original author [@Contents](https://github.com/Cenmrev). Pay tribute to [@Contents](https://github.com/Cenmrev), Thanks to the [@XTLS](https://github.com/XTLS) community and all contributors
+> This repo is an active fork of [tzmax/V2RayXS](https://github.com/tzmax/V2RayXS),
+> which is based on [Cenmrev/V2RayX](https://github.com/Cenmrev/V2RayX). It uses
+> [Xray-core](https://github.com/XTLS/Xray-core) to support VLESS and XTLS protocols.
+> Copyright of the original application belongs to [@Cenmrev](https://github.com/Cenmrev).
+> Tribute to [@Cenmrev](https://github.com/Cenmrev), [@tzmax](https://github.com/tzmax),
+> and the [@XTLS](https://github.com/XTLS) community.
 
 ## What is XTLS? Xray?
 
@@ -60,17 +65,17 @@ for more questions, you can also check issues first, and submit issues if you do
 
 ## Download V2RayXS
 
-Download from [Releases](https://github.com/tzmax/V2RayXS/releases).
+Download from [Releases](https://github.com/farestz/V2RayXS/releases).
 
 ## How to build
 
 V2RayXS.app is built by running one of the following commands in your terminal. You can install this via the command-line with curl.
 
-`sh -c "$(curl -fsSL https://raw.githubusercontent.com/tzmax/V2RayXS/master/compilefromsource.sh)"`
+`sh -c "$(curl -fsSL https://raw.githubusercontent.com/farestz/V2RayXS/master/compilefromsource.sh)"`
 
 or step by step:
 
-`git clone --recursive https://github.com/tzmax/V2RayXS.git`
+`git clone --recursive https://github.com/farestz/V2RayXS.git`
 
 open V2RayXS.xcodeproj and use Xcode to build V2RayXS.
 
@@ -249,7 +254,7 @@ Of course, you can also use it to control your `VMess` and `VLESS` configuration
 
 This repo is based on the [Cenmrev/V2RayX](https://github.com/Cenmrev/V2RayX) project for maintenance and update.
 
-V2RayXS uses [GCDWebServer](https://github.com/swisspol/GCDWebServer) to provide a local pac server. V2RayXS also uses many ideas and codes from [ShadowsocksX](https://github.com/shadowsocks/shadowsocks-iOS/tree/master), especially, the codes of [v2rays_sysconfig](https://github.com/tzmax/V2RayXS/blob/master/v2rayx_sysconf/main.m) are simply copied from [shadowsocks_sysconf](https://github.com/shadowsocks/shadowsocks-iOS/blob/master/shadowsocks_sysconf/main.m) with some modifications.
+V2RayXS uses [GCDWebServer](https://github.com/swisspol/GCDWebServer) to provide a local pac server. V2RayXS also uses many ideas and codes from [ShadowsocksX](https://github.com/shadowsocks/shadowsocks-iOS/tree/master), especially, the codes of [v2rays_sysconfig](https://github.com/farestz/V2RayXS/blob/master/v2rayx_sysconf/main.m) are simply copied from [shadowsocks_sysconf](https://github.com/shadowsocks/shadowsocks-iOS/blob/master/shadowsocks_sysconf/main.m) with some modifications.
 
 ## Donation
 
@@ -259,8 +264,3 @@ To donate to Project V2Ray, you may refer to [this page](https://www.v2ray.com/c
 
 To donate to Project Xray, you may refer to [this page](https://xtls.github.io/#%E5%B8%AE%E5%8A%A9-xray-%E5%8F%98%E5%BE%97%E6%9B%B4%E5%BC%BA).
 
-## Disclaimer
-
-V2rayXS will not be updated frequently. Users can replace V2RayXS.app/Contents/Resources/xray with the newest Xray-core downloaded from <https://github.com/XTLS/Xray-core/releases>.
-
-The developer currently does not have enough time to add more features to V2RayXS. However, welcome to the contribution at any time, and the fork and your own version.
