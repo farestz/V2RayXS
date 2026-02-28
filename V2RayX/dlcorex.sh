@@ -1,4 +1,5 @@
-VERSION="1.8.13"
+SRCROOT="${SRCROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+VERSION=$(cat "$SRCROOT/xray-version" 2>/dev/null || echo "26.2.6")
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BOLD='\033[1m'

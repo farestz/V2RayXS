@@ -35,6 +35,10 @@ if [[ ! -f /Applications/Xcode.app/Contents/MacOS/Xcode ]]; then
 else
     echo -e "${BOLD}-- Start building V2RayXS --${NORMAL}"
     echo -e "${BOLD}-- 开始编译 V2RayXS --${NORMAL}"
+    git submodule update --init --recursive
+    export SRCROOT="$PROJECT_ROOT"
+    export ARCHS="${useArch}"
+    bash "$PROJECT_ROOT/V2RayX/dlcorex.sh" || { echo -e "${RED}-- xray-core download failed --${NORMAL}"; exit 1; }
     xcodebuild "${XCODEBUILD_ARGS[@]}"
     if [[ $? == 0 ]]; then
         echo -e "${GREEN}-- Build succeeded --${NORMAL}"
@@ -52,11 +56,11 @@ else
         fi
 
         zip -r V2RayXS.app.zip V2RayXS.app && mkdir -p ../out/ && rsync -a V2RayXS.app.zip "../out/V2RayXS_${useArch}.app.zip"
-        md5sum "../out/V2RayXS_${useArch}.app.zip" | echo "MD5="$(cat) | cut -f1 -d" " >> "../out/V2RayXS_${useArch}.app.zip.dgst"
-        sha1sum "../out/V2RayXS_${useArch}.app.zip" | echo "SHA1="$(cat) | cut -f1 -d" " >> "../out/V2RayXS_${useArch}.app.zip.dgst"
-        sha256sum "../out/V2RayXS_${useArch}.app.zip" | echo "SHA2-256="$(cat) | cut -f1 -d" " >> "../out/V2RayXS_${useArch}.app.zip.dgst"
+        md5 -r "../out/V2RayXS_${useArch}.app.zip" | awk '{print "MD5="$1}' >> "../out/V2RayXS_${useArch}.app.zip.dgst"
+        shasum -a 1 "../out/V2RayXS_${useArch}.app.zip" | awk '{print "SHA1="$1}' >> "../out/V2RayXS_${useArch}.app.zip.dgst"
+        shasum -a 256 "../out/V2RayXS_${useArch}.app.zip" | awk '{print "SHA2-256="$1}' >> "../out/V2RayXS_${useArch}.app.zip.dgst"
         echo -e "${GREEN}-- Packaging succeeded --${NORMAL}"
-        cd ->/dev/null 2>&1
+        cd - >/dev/null 2>&1
 
     else
         echo -e "${RED}-- Build failed --${NORMAL}"
