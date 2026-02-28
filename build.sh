@@ -39,6 +39,7 @@ else
     export SRCROOT="$PROJECT_ROOT"
     export ARCHS="${useArch}"
     bash "$PROJECT_ROOT/V2RayX/dlcorex.sh" || { echo -e "${RED}-- xray-core download failed --${NORMAL}"; exit 1; }
+    bash "$PROJECT_ROOT/V2RayX/dlgeodat.sh" || { echo -e "${RED}-- geo data download failed --${NORMAL}"; exit 1; }
     xcodebuild "${XCODEBUILD_ARGS[@]}"
     if [[ $? == 0 ]]; then
         echo -e "${GREEN}-- Build succeeded --${NORMAL}"

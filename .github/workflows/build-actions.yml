@@ -25,6 +25,10 @@ jobs:
           export SRCROOT=$(pwd)
           export ARCHS=x86_64
           bash V2RayX/dlcorex.sh
+      - name: Download geo data
+        run: |
+          export SRCROOT=$(pwd)
+          bash V2RayX/dlgeodat.sh
       - name: Build V2RayXS for x86_64 Arch
         run: /usr/bin/env bash build.sh x86_64
       - name: Build V2RayXS for arm64 Arch
