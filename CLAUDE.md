@@ -84,6 +84,8 @@ No CI/CD pipeline. Releases are built manually with `build.sh` and distributed a
 
 ## Workflow
 
+When a task falls under a specific model's responsibility, launch it as a subagent using the Agent tool with `model: "opus"`, `model: "sonnet"`, or `model: "haiku"` accordingly. Do not perform that model's work yourself — delegate it.
+
 ### Opus — architecture, planning, and critical code
 - Plan features (max iterations, precise changes down to files/functions/lines)
 - Architectural decisions and trade-off analysis
