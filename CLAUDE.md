@@ -84,7 +84,7 @@ No CI/CD pipeline. Releases are built manually with `build.sh` and distributed a
 
 ## Workflow
 
-When a task falls under a specific model's responsibility, launch it as a subagent using the Agent tool with `model: "opus"`, `model: "sonnet"`, or `model: "haiku"` accordingly. Do not perform that model's work yourself — delegate it.
+You MUST launch subagents via the Agent tool with the appropriate `model` parameter when a task falls under a specific model's responsibility. Never perform that model's work yourself — always delegate it. Examples: git operations and codebase exploration MUST use `model: "haiku"`; architecture and security-critical code MUST use `model: "opus"`.
 
 ### Opus — architecture, planning, and critical code
 - Plan features (max iterations, precise changes down to files/functions/lines)
