@@ -33,6 +33,20 @@ bash build.sh x86_64   # or arm64
 # Output: build/Release/V2RayXL.app
 ```
 
+### Build & Run
+
+```bash
+# Build debug and launch the app (kill existing instance first)
+xcodebuild -project V2RayXL.xcodeproj -target V2RayXL -configuration Debug \
+  && pkill -x V2RayXL 2>/dev/null; sleep 0.5 \
+  && open build/Debug/V2RayXL.app
+
+# View app logs in real time
+log stream --predicate 'processImagePath ENDSWITH "V2RayXL"' --level debug
+```
+
+The app appears only in the menu bar (`LSUIElement = YES`), not in the Dock. After `open`, look for the menu bar icon to confirm it launched.
+
 ### Xcode build targets
 
 - **V2RayXL** — main app target

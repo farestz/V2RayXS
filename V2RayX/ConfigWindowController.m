@@ -505,7 +505,7 @@ static NSString * const kGeoBaseURL = @"https://github.com/Loyalsoldier/v2ray-ru
 - (IBAction)updateGeoFiles:(id)sender {
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Update Geo Files"];
-    [alert setInformativeText:@"Download updated geoip.dat and geosite.dat from Loyalsoldier/v2ray-rules-dat?\n\nFiles will be verified with SHA256 before replacing existing ones."];
+    [alert setInformativeText:@"Download updated geoip.dat and geosite.dat from Loyalsoldier/v2ray-rules-dat?"];
     [alert addButtonWithTitle:@"Update"];
     [alert addButtonWithTitle:@"Cancel"];
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
@@ -646,7 +646,7 @@ static NSString * const kGeoBaseURL = @"https://github.com/Loyalsoldier/v2ray-ru
 }
 
 - (void)atomicReplaceGeoFilesFromTempDir:(NSString *)tempDir fileList:(NSArray<NSString *> *)files {
-    NSString *destDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL", NSHomeDirectory()];
+    NSString *destDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core", NSHomeDirectory()];
     NSFileManager *fm = [NSFileManager defaultManager];
     [fm createDirectoryAtPath:destDir withIntermediateDirectories:YES attributes:nil error:nil];
 

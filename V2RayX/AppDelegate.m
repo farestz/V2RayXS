@@ -73,6 +73,27 @@ static AppDelegate *appDelegate;
     if (![fileManager fileExistsAtPath:pacDir]) {
         [fileManager createDirectoryAtPath:pacDir withIntermediateDirectories:YES attributes:nil error:nil];
     }
+    // Ensure xray-core directory exists; seed from bundle if first launch
+    NSString *xrayCoreDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core", NSHomeDirectory()];
+    if (![fileManager fileExistsAtPath:xrayCoreDir]) {
+        [fileManager createDirectoryAtPath:xrayCoreDir withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSString *bundleResources = [[NSBundle mainBundle] resourcePath];
+    for (NSString *fileName in @[@"xray", @"geoip.dat", @"geosite.dat"]) {
+        NSString *dst = [xrayCoreDir stringByAppendingPathComponent:fileName];
+        if (![fileManager fileExistsAtPath:dst]) {
+            NSString *src = [bundleResources stringByAppendingPathComponent:fileName];
+            NSError *copyErr = nil;
+            if ([fileManager copyItemAtPath:src toPath:dst error:&copyErr]) {
+                if ([fileName isEqualToString:@"xray"]) {
+                    [fileManager setAttributes:@{NSFilePosixPermissions: @0755}
+                                  ofItemAtPath:dst error:nil];
+                }
+            } else {
+                NSLog(@"Failed to copy %@ from bundle: %@", fileName, copyErr.localizedDescription);
+            }
+        }
+    }
     // Create Log Dir
     NSString* logDirName = @"cenmrev.v2rayx.log";
     logDirPath = [NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), logDirName];
@@ -1076,48 +1097,11 @@ static AppDelegate *appDelegate;
 //}
 
 -(NSString*)getV2rayPath {
-    NSString* defaultV2ray = [NSString stringWithFormat:@"%@/xray", [[NSBundle mainBundle] resourcePath]];
-    NSFileManager* fileManager = [NSFileManager defaultManager];
-    NSString* cusV2ray = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/xray",NSHomeDirectory()];
-    for (NSString* binary in @[@"xray"]) {
-        NSString* fullpath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/%@",NSHomeDirectory(), binary];
-        BOOL isDir = YES;
-        if (![fileManager fileExistsAtPath:fullpath isDirectory:&isDir] || isDir || ![fileManager setAttributes:@{NSFilePosixPermissions: [NSNumber numberWithShort:0777]} ofItemAtPath:fullpath error:nil]) {
-            return defaultV2ray;
-        }
-    }
-    return cusV2ray;
-    
+    return [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/xray", NSHomeDirectory()];
 }
 
 -(NSString*)getGeoAssetPath {
-    NSFileManager *fm = [NSFileManager defaultManager];
-    // Priority 1: user-downloaded geo files in ~/Library/Application Support/V2RayXL/
-    NSString *appSupportDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL", NSHomeDirectory()];
-    BOOL allExist = YES;
-    for (NSString *geoFile in @[@"geoip.dat", @"geosite.dat"]) {
-        BOOL isDir = YES;
-        NSString *path = [appSupportDir stringByAppendingPathComponent:geoFile];
-        if (![fm fileExistsAtPath:path isDirectory:&isDir] || isDir) {
-            allExist = NO;
-            break;
-        }
-    }
-    if (allExist) return appSupportDir;
-    // Priority 2: custom xray-core directory (backward compat)
-    NSString *cusDir = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core", NSHomeDirectory()];
-    allExist = YES;
-    for (NSString *geoFile in @[@"geoip.dat", @"geosite.dat"]) {
-        BOOL isDir = YES;
-        NSString *path = [cusDir stringByAppendingPathComponent:geoFile];
-        if (![fm fileExistsAtPath:path isDirectory:&isDir] || isDir) {
-            allExist = NO;
-            break;
-        }
-    }
-    if (allExist) return cusDir;
-    // Priority 3: bundled in app Resources
-    return [[NSBundle mainBundle] resourcePath];
+    return [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core", NSHomeDirectory()];
 }
 
 - (void)restartCoreIfRunning {
