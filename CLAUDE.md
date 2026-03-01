@@ -70,8 +70,37 @@ No CI/CD pipeline. Releases are built manually with `build.sh` and distributed a
 
 ## Workflow
 
-- **Plan on Opus** (max iterations, precise change descriptions down to exact files/functions/lines), **implement on Sonnet** — switch model after plan approval.
-- **Git operations** (status, diff, log, commit) — delegate to subagents on **Haiku** to save context and cost.
+### Opus — architecture, planning, and critical code
+- Plan features (max iterations, precise changes down to files/functions/lines)
+- Architectural decisions and trade-off analysis
+- Review and refine plans before approval
+
+**Opus writes code when:**
+- Security-sensitive logic: cryptography, hash verification, certificate validation, credential handling, privilege escalation (`v2rayxl_sysconf`)
+- Network security: TLS/mTLS configuration, proxy authentication, protocol parsing
+- Complex algorithms: non-trivial data transformations, state machines, concurrency/synchronization
+- System-level C code: the privileged helper, TUN device management, routing table manipulation
+- Code that is hard to verify by reading — where a subtle bug causes silent data corruption or security bypass
+
+### Sonnet — general implementation
+- Write code following approved plans (UI, config generation, data models, standard AppKit patterns)
+- Bulk find-and-replace across files
+- Debug build errors (read xcodebuild logs, fix issues)
+- Update documentation (README, CLAUDE.md)
+- Update localization (.strings files)
+
+**Sonnet writes code when:**
+- UI and layout: window controllers, menu items, XIB wiring, cosmetic changes
+- Data models and serialization: `ServerProfile`, JSON config generation, plist read/write
+- Standard networking: subscription fetching, file downloads (non-auth)
+- Glue code: AppDelegate lifecycle, NSTask orchestration, user defaults
+- Anything where the approved plan already specifies exact changes line-by-line
+
+### Haiku — mechanical subagent tasks
+- **Git operations**: status, diff, log, commit, push
+- **Codebase exploration**: `subagent_type=Explore` for grep/glob/read (saves Opus context from ingesting large files like AppDelegate.m, pbxproj)
+- **Build verification**: run xcodebuild, report success/failure and errors only
+- **Post-change checks**: grep for stale references, verify bundle ID in built .app
 
 ## Important Constraints
 
