@@ -19,50 +19,6 @@
 
 **YOU SHOULD READ XTLS'S OFFICIAL INSTRUCTION BEFORE USING V2RAYXS!**
 
-## What is Tun Mode? (Experimental)
-
-**Warn**: You must read this part of the document before using tun mode.
-
-First of all, please note that this function is an experimental function and is still under development and design. Due to the particularity of the tun mode, I hope you can use it after fully understanding it.
-
-This mode adopts the tun2socks method to forward all traffic, realizes the creation of a utun virtual network card device, and transmits the traffic of the tun device to your server through the socks5 proxy, and then the application sets up the routing table, and sets the default gateway to this tun device (please Note that this step may cause the default gateway routing settings of your device to be damaged. Although I have done a backup and repair process in the application, I cannot guarantee that it will be effective on all devices, please use it with caution!)
-
-Finally, if you are interested in this technology, you can also try to contact me or submit a PR to help me improve this function. If you can recommend this software to friends or post a blog and be able to link this project in other post replies, I will Very happy 😋, thank you for your attention and contribution (Welcome to contribute documents in other languages)
-
-1. Please understand what transparent proxy is (recommended reference this page [What is a transparent proxy?](https://xtls.github.io/Xray-docs-next/document/level-2/transparent_proxy/transparent_proxy.html)), if PAC mode and global mode can meet your needs, please try to use it.
-
-2. You have a certain understanding of the computer network and can solve the network problem of your device independently.
-
-### Have you encountered a problem?
-
-Q: After using tun mode, the device is disconnected from the network? 
-
-A: It may be that the route of the default gateway is broken. You can check your routing table by executing the `netstat -r` command through the device terminal. Normally, there will be a `default` route, as follows
-
-```
-tzmaxdeMacBookPro: tzmax$ netstat -r
-Routing tables
-
-Internet:
-Destination        Gateway            Flags           Netif Expire
-default            192.168.1.1        UGScg             en0       
-127                localhost          UCS               lo0       
-localhost          localhost          UH                lo0    
-………
-```
-
-Q: How to fix you gateway? (if you can't access the Internet after turning off tun mode after using tun mode, you can try to fix it like this. If it still doesn't work, you can try to restart your device)
-
-A: If you know your default gateway, after turning off tun mode, you can set the default gateway through the `/sbin/route add -net` command
-
-for example: `sudo /sbin/route add -net default 192.168.1.1`
-
-Q: Which tun device does the V2RayXS create?
-
-A: The name of the tun device on macos will be determined by the system, but the tun device created by V2RayXS will be bound to the `10.0.0.0` network segment by default, which can be used as a reference to find
-
-for more questions, you can also check issues first, and submit issues if you do not find a solution.
-
 ## Download V2RayXS
 
 Download from [Releases](https://github.com/farestz/V2RayXS/releases).
@@ -92,7 +48,6 @@ V2RayXS provide three modes:
 -   Global Mode: V2RayXS asks macOS to route all internet traffic to xray core if the network traffic obeys operating system's network rules.
 -   PAC Mode: macOS will determine the routing based on a pac file and some traffic may be routed to xray core.
 -   Manual Mode: V2RayXS will not modify any macOS network settings, but only start or stop xray core.
--   Tun Mode (**Experimental**): V2RayXS will create a virtual network card, and then try to set the default gateway to take over and proxy the full traffic of the device.
 
 
 Options in menu list `Routing Rule` determine how xray core deals with incoming traffic. Core routing rules apply to all three modes above.

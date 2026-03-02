@@ -181,7 +181,6 @@ static AppDelegate *appDelegate;
     _pacModeItem.tag = pacMode;
     _globalModeItem.tag = globalMode;
     _manualModeItem.tag = manualMode;
-    _tunModeItem.tag = tunMode;
     
     // read defaults
     [self readDefaults];
@@ -377,6 +376,9 @@ static AppDelegate *appDelegate;
     
     proxyState = [nilCoalescing(appStatus[@"proxyState"], @(NO)) boolValue]; //turn off proxy as default
     proxyMode = [nilCoalescing(appStatus[@"proxyMode"], @(manualMode)) integerValue];
+    if (proxyMode > manualMode) {
+        proxyMode = manualMode;
+    }
     selectedServerIndex = [nilCoalescing(appStatus[@"selectedServerIndex"], @0) integerValue];
     selectedCusServerIndex = [nilCoalescing(appStatus[@"selectedCusServerIndex"], @0) integerValue];
     _selectedRoutingSet = [nilCoalescing(appStatus[@"selectedRoutingSet"], @0) integerValue];
@@ -527,12 +529,6 @@ static AppDelegate *appDelegate;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // close the tun device helper
-    if (proxyMode == tunMode) {
-        dispatch_async(taskQueue, ^{
-            closeHelperApplicationTask();
-        });
-    }
     //stop monitor pac
     if (dispatchPacSource) {
         dispatch_source_cancel(dispatchPacSource);
@@ -622,9 +618,6 @@ static AppDelegate *appDelegate;
     if (proxyState == true) {
         [self updateSystemProxy];
     } else {
-        dispatch_async(taskQueue, ^{
-            closeHelperApplicationTask();
-        });
         [self unloadV2ray];
     }
     [self updateMenus];
@@ -639,12 +632,6 @@ static AppDelegate *appDelegate;
         _enableRestore ? [self restoreSystemProxy] : [self cancelSystemProxy];
     }
     
-    if (proxyMode == tunMode) {
-        dispatch_async(taskQueue, ^{
-            closeHelperApplicationTask();
-        });
-    }
-
     proxyMode = [sender tag];
     [self updateMenus];
     if (sender == _pacModeItem) {
@@ -670,7 +657,6 @@ static AppDelegate *appDelegate;
     [_pacModeItem setState:proxyMode == pacMode];
     [_manualModeItem setState:proxyMode == manualMode];
     [_globalModeItem setState:proxyMode == globalMode];
-    [_tunModeItem setState:proxyMode == tunMode];
 }
 
 - (void)updatePacMenuList {
@@ -728,10 +714,7 @@ static AppDelegate *appDelegate;
 
 -(void)updateSystemProxy {
     NSArray *arguments;
-    dispatch_async(taskQueue, ^{
-        closeHelperApplicationTask();
-    });
-    
+
     if (proxyState) {
         if (proxyMode == manualMode) { // manualMode mode
             arguments = @[@"-v"]; // do nothing
@@ -740,9 +723,7 @@ static AppDelegate *appDelegate;
         } else {
             NSInteger cusHttpPort = 0;
             NSInteger cusSocksPort = 0;
-            
-            NSMutableArray *serverAddress = [[NSMutableArray alloc] init];
-            
+
             // global mode
             if(useMultipleServer || !useCusProfile) {
                 arguments = @[@"global", [NSString stringWithFormat:@"%ld", localPort], [NSString stringWithFormat:@"%ld", httpPort]];
@@ -767,39 +748,6 @@ static AppDelegate *appDelegate;
                 NSLog(@"socks: %ld, http: %ld", cusSocksPort, cusHttpPort);
                 arguments = @[@"global", [NSString stringWithFormat:@"%ld", cusSocksPort], [NSString stringWithFormat:@"%ld", cusHttpPort]];
             }
-            
-            // tun mode
-            if(proxyMode == tunMode) {
-                
-                if(!useCusProfile) {
-                    // Get the currently selected server
-                    NSDictionary* profile = profiles[selectedServerIndex];
-                    if(profile != NULL && profile[@"settings"] != NULL && profile[@"settings"][@"vnext"] != NULL && [profile[@"settings"][@"vnext"] isKindOfClass:[NSArray class]]) {
-                        for (NSDictionary *vnextItem in profile[@"settings"][@"vnext"]) {
-                            if(vnextItem[@"address"] != NULL) {
-                                [serverAddress addObject: vnextItem[@"address"]];
-                            }
-                        }
-                    }
-                    
-                    // Count all servers.
-                    for (NSDictionary *profile in profiles) {
-                        if(profile != NULL && profile[@"settings"] != NULL && profile[@"settings"][@"vnext"] != NULL && [profile[@"settings"][@"vnext"] isKindOfClass:[NSArray class]]) {
-                            for (NSDictionary *vnextItem in profile[@"settings"][@"vnext"]) {
-                                if(vnextItem[@"address"] != NULL && ![serverAddress containsObject: vnextItem[@"address"]]) {
-                                    [serverAddress addObject: vnextItem[@"address"]];
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                if(serverAddress.count < 1) {
-                    [serverAddress addObject: @""];
-                }
-                arguments = @[@"tun", serverAddress[0], [NSString stringWithFormat:@"%ld", localPort]];
-            }
-            
         }
         
         dispatch_async(taskQueue, ^{
@@ -1145,29 +1093,8 @@ static AppDelegate *appDelegate;
 }
 
 
-NSTask *helperApplicationTask;
-
-void closeHelperApplicationTask() {
-    if(helperApplicationTask != NULL && [helperApplicationTask isRunning]) {
-        // NSLog(@"tzmax: commTask terminate");
-        [helperApplicationTask interrupt]; // push SIGINT signal, enable the helper to perform the cleanup task.
-        sleep(1);
-        // usleep(800 * 1000);
-        [helperApplicationTask terminate];
-        helperApplicationTask = NULL;
-        return;
-    }
-}
-
 int runCommandLine(NSString* launchPath, NSArray* arguments) {
     NSTask *task = [[NSTask alloc] init];
-    
-    // take notes helperApplicationTask
-    closeHelperApplicationTask();
-    if(helperApplicationTask == NULL && [arguments[0]  isEqual: @"tun"]) {
-        helperApplicationTask = task;
-    }
-    
     [task setLaunchPath:launchPath];
     [task setArguments:arguments];
     NSPipe *stdoutpipe = [NSPipe pipe];

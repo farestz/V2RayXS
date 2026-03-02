@@ -8,7 +8,7 @@ macOS menu-bar GUI client for xray-core (proxy). Objective-C + AppKit (no Swift/
 - UI: AppKit with XIB files (no SwiftUI)
 - Build: Xcode project (`V2RayXL.xcodeproj`)
 - Frameworks: Cocoa, SystemConfiguration, libz
-- Bundled: GCDWebServer (git submodule), Tun2socks.xcframework
+- Bundled: GCDWebServer (git submodule)
 
 ## Build
 
@@ -50,7 +50,7 @@ The app appears only in the menu bar (`LSUIElement = YES`), not in the Dock. Aft
 ### Xcode build targets
 
 - **V2RayXL** — main app target
-- **v2rayxl_sysconf** — privileged C helper (system proxy / routing / TUN)
+- **v2rayxl_sysconf** — privileged C helper (system proxy settings)
 
 No test targets exist. Testing is manual: build and run the app.
 
@@ -63,7 +63,7 @@ ConfigWindowController       — main server config UI
 AdvancedWindowController     — outbounds, routing rules, subscriptions
 ConfigImporter               — parses VMess/VLESS links and subscription URLs
 GCDWebServer                 — local HTTP server for PAC file (port 8071)
-v2rayxl_sysconf              — C helper: system proxy settings, routing, TUN device
+v2rayxl_sysconf              — C helper: system proxy settings
 ```
 
 ## Config Paths
@@ -95,7 +95,7 @@ You MUST launch subagents via the Agent tool with the appropriate `model` parame
 - Security-sensitive logic: cryptography, hash verification, certificate validation, credential handling, privilege escalation (`v2rayxl_sysconf`)
 - Network security: TLS/mTLS configuration, proxy authentication, protocol parsing
 - Complex algorithms: non-trivial data transformations, state machines, concurrency/synchronization
-- System-level C code: the privileged helper, TUN device management, routing table manipulation
+- System-level C code: the privileged helper
 - Code that is hard to verify by reading — where a subtle bug causes silent data corruption or security bypass
 
 ### Sonnet — general implementation
@@ -111,10 +111,10 @@ You MUST launch subagents via the Agent tool with the appropriate `model` parame
 - Standard networking: subscription fetching, file downloads (non-auth)
 - Glue code: AppDelegate lifecycle, NSTask orchestration, user defaults
 - Anything where the approved plan already specifies exact changes line-by-line
+- **Codebase exploration**: `subagent_type=Explore` for grep/glob/read (saves Opus context from ingesting large files like AppDelegate.m, pbxproj)
 
 ### Haiku — mechanical subagent tasks
 - **Git operations**: status, diff, log, commit, push
-- **Codebase exploration**: `subagent_type=Explore` for grep/glob/read (saves Opus context from ingesting large files like AppDelegate.m, pbxproj)
 - **Build verification**: run xcodebuild, report success/failure and errors only
 - **Post-change checks**: grep for stale references, verify bundle ID in built .app
 
@@ -125,7 +125,6 @@ You MUST launch subagents via the Agent tool with the appropriate `model` parame
 - Do not add XCTest unless specifically asked
 - Xray binary is NOT in git — must be downloaded separately via `dlcorex.sh`
 - `v2rayxl_sysconf` helper needs elevated privileges for system proxy/routing changes
-- TUN mode is experimental; can break routing if misused
 - Minimum deployment target: macOS 10.12 (most APIs used are 10.13+)
 - Separate builds required for x86_64 and arm64 (xray binary is arch-specific too)
 - `LSUIElement = YES` — menu bar only app, no Dock icon

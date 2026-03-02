@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		34315F9E297DB3A9000DDA2D /* route.m in Sources */ = {isa = PBXBuildFile; fileRef = 34315F9D297DB3A9000DDA2D /* route.m */; };
-		34AA955F299B5E7500E06D1B /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AA955E299B5E7500E06D1B /* Tun2socks.xcframework */; };
-		34BB19C9297A7A9600331407 /* tun.m in Sources */ = {isa = PBXBuildFile; fileRef = 34BB19C8297A7A9600331407 /* tun.m */; };
 		9504C07D1C662C3000352520 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9504C07C1C662C3000352520 /* AppDelegate.m */; };
 		9504C0801C662C3000352520 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9504C07F1C662C3000352520 /* main.m */; };
 		9504C0821C662C3000352520 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9504C0811C662C3000352520 /* Assets.xcassets */; };
@@ -91,11 +88,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		34315F9D297DB3A9000DDA2D /* route.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = route.m; sourceTree = "<group>"; };
-		34315F9F297DB3BC000DDA2D /* route.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = route.h; sourceTree = "<group>"; };
-		34AA955E299B5E7500E06D1B /* Tun2socks.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Tun2socks.xcframework; path = Librarys/Tun2socks.xcframework; sourceTree = "<group>"; };
-		34BB19C8297A7A9600331407 /* tun.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tun.m; sourceTree = "<group>"; };
-		34BB19CB297A8E6600331407 /* tun.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tun.h; sourceTree = "<group>"; };
 		9504C0781C662C3000352520 /* V2RayXL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = V2RayXL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9504C07B1C662C3000352520 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9504C07C1C662C3000352520 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -189,7 +181,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34AA955F299B5E7500E06D1B /* Tun2socks.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +197,6 @@
 		9504C06F1C662C3000352520 = {
 			isa = PBXGroup;
 			children = (
-				34AA955E299B5E7500E06D1B /* Tun2socks.xcframework */,
 				95862BD41DB2862E00F4A9CA /* compilefromsource.sh */,
 				9D7DFE521EBEC947001FECBD /* jsonplist */,
 				95FCB2451C688BB20081B6FD /* Frameworks */,
@@ -281,10 +271,6 @@
 			children = (
 				9504C0C81C662DB500352520 /* main.m */,
 				9DA398B5209ECED400784947 /* sysconf_version.h */,
-				34BB19C8297A7A9600331407 /* tun.m */,
-				34BB19CB297A8E6600331407 /* tun.h */,
-				34315F9D297DB3A9000DDA2D /* route.m */,
-				34315F9F297DB3BC000DDA2D /* route.h */,
 			);
 			path = v2rayxl_sysconf;
 			sourceTree = "<group>";
@@ -592,9 +578,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34315F9E297DB3A9000DDA2D /* route.m in Sources */,
 				9504C0C91C662DB500352520 /* main.m in Sources */,
-				34BB19C9297A7A9600331407 /* tun.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,10 +815,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/v2rayxl_sysconf",
-				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -844,10 +824,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/v2rayxl_sysconf",
-				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
