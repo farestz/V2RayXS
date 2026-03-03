@@ -72,6 +72,9 @@ v2rayxl_sysconf              — C helper: system proxy settings
 - App support: `~/Library/Application Support/V2RayXL/`
 - Generated xray config: `~/Library/Application Support/V2RayXL/config.json`
 - PAC file: served locally on port 8071
+- Xray binary: `~/Library/Application Support/V2RayXL/xray-core/xray`
+- Geo data: `~/Library/Application Support/V2RayXL/xray-core/geoip.dat`, `geosite.dat`
+- Build-time binary source: `xray-core-bin/` (downloaded by `V2RayX/dlcorex.sh`)
 
 ## CI/CD
 

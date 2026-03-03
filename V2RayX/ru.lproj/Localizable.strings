@@ -1,0 +1,42 @@
+/* Localizable.strings - Russian */
+
+"enter your subscription link here" = "введите ссылку на подписку";
+"% is not a valid xray config file" = "% — некорректный файл конфигурации xray";
+"NOT a valid json" = "Некорректный JSON";
+"Do you want to reset rule sets to original three ones?" = "Сбросить наборы правил к трём исходным?";
+
+"two password do not match each other." = "Пароли не совпадают.";
+"Error in parsing customized tcp http header!" = "Ошибка разбора пользовательского TCP HTTP-заголовка!";
+"Error in parsing customized WebSocket headers!" = "Ошибка разбора пользовательских WebSocket-заголовков!";
+"Both client and server must enable TLS to use HTTP/2 network! Enbale TLS in transport settings. Click \"Help\" if you need more information" = "Для использования HTTP/2 на клиенте и сервере должен быть включён TLS! Включите TLS в настройках транспорта. Нажмите \"Помощь\" для подробностей";
+"%\ntag is not valid!" = "%\nтег недопустим!";
+"tag % is reserved, please use another one!" = "тег % зарезервирован, используйте другой!";
+"The two outbounds share the same tag: %\n%\nAND\n%" = "Два исходящих соединения имеют одинаковый тег: %\n%\nИ\n%";
+"Support standard vmess:// and ss:// link. Standard vmess:// link is still under discussion. Use \"Import from other links...\" to import other links, for example, vmess:// invented by v2rayN." = "Поддерживаются стандартные ссылки vmess:// и ss://. Стандарт vmess:// ещё обсуждается. Используйте \"Импорт из других ссылок...\", чтобы импортировать другие форматы, например vmess:// от v2rayN.";
+"Imported %lu vmess and %lu other protocol outbounds, %lu routing rule sets." = "Импортировано %lu vmess и %lu других исходящих соединений, %lu наборов правил маршрутизации.";
+"V2RayXL will try importing ssd://, vmess:// and http(s):// links from v2rayN and SSD(may cause failure)." = "V2RayXL попытается импортировать ссылки ssd://, vmess:// и http(s):// из v2rayN и SSD (возможны ошибки).";
+"If you are running V2RayXL for the first time, ignore this message. \nSorry, unknown settings!\nAll V2RayXL settings will be reset." = "Если вы запускаете V2RayXL впервые, проигнорируйте это сообщение.\nНеизвестные настройки!\nВсе настройки V2RayXL будут сброшены.";
+"Input Password" = "Ввод пароля";
+"input your password to continue" = "введите пароль для продолжения";
+"input password to decrypt configurations" = "введите пароль для расшифровки конфигурации";
+"V2RayXL needs to install a small tool to /Library/Application Support/V2RayXL/ with administrator privileges to set system proxy quickly.\nOtherwise you need to type in the administrator password every time you change system proxy through V2RayXL." = "V2RayXL необходимо установить вспомогательную утилиту в /Library/Application Support/V2RayXL/ с правами администратора для быстрой настройки системного прокси.\nИначе вам придётся вводить пароль администратора при каждом изменении системного прокси через V2RayXL.";
+
+"xray-core: loaded" = "xray-core: загружен";
+"Unload core" = "Выгрузить ядро";
+"xray-core: unloaded" = "xray-core: выгружен";
+"Load core" = "Загрузить ядро";
+"The pac file will be reset to the original one coming with V2RayXL. Are you sure to proceed?" = "PAC-файл будет сброшен к версии по умолчанию. Продолжить?";
+"% is not writable!" = "% недоступен для записи!";
+"no available servers, please add server profiles through config window." = "Нет доступных серверов. Добавьте профили через окно конфигурации.";
+"Use All" = "Использовать все";
+
+
+"success" = "Успешно";
+"Decrypt" = "Расшифровать";
+"Close" = "Закрыть";
+"Help" = "Помощь";
+"Quit" = "Выход";
+"Continue" = "Продолжить";
+"Cancel" = "Отмена";
+"Yes" = "Да";
+"Install" = "Установить";

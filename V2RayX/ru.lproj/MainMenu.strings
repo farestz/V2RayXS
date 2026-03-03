@@ -1,0 +1,106 @@
+/* MainMenu.strings - Russian */
+
+/* Class = "NSMenuItem"; title = "Configure..."; ObjectID = "0hJ-Jo-rS2"; */
+"0hJ-Jo-rS2.title" = "Настроить...";
+
+/* Class = "NSMenuItem"; title = "Global Mode"; ObjectID = "12u-76-Ytb"; */
+"12u-76-Ytb.title" = "Глобальный режим";
+
+/* Class = "NSMenuItem"; title = "V2RayX"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "V2RayXL";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "1b7-l0-nxx"; */
+"1b7-l0-nxx.title" = "Найти";
+
+/* Class = "NSMenuItem"; title = "Quit"; ObjectID = "2N5-MP-9vf"; */
+"2N5-MP-9vf.title" = "Выход";
+
+/* Class = "NSMenuItem"; title = "Copy HTTP Proxy Shell Export Line"; ObjectID = "2fK-AZ-akH"; */
+"2fK-AZ-akH.title" = "Копировать команду HTTP-прокси для терминала";
+
+/* Class = "NSMenuItem"; title = "Edit pac file"; ObjectID = "3NY-51-bgh"; */
+"3NY-51-bgh.title" = "Редактировать PAC-файл";
+
+/* Class = "NSMenuItem"; title = "Server"; ObjectID = "3wi-Co-2Kd"; */
+"3wi-Co-2Kd.title" = "Сервер";
+
+/* Class = "NSMenuItem"; title = "Quit V2RayX"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Завершить V2RayXL";
+
+/* Class = "NSMenuItem"; title = "View log"; ObjectID = "5Vg-qU-2V2"; */
+"5Vg-qU-2V2.title" = "Просмотр лога";
+
+/* Class = "NSMenuItem"; title = "About V2RayX"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "О V2RayXL";
+
+/* Class = "NSMenu"; title = "Routing Rule"; ObjectID = "8Ld-d4-m0U"; */
+"8Ld-d4-m0U.title" = "Правила маршрутизации";
+
+/* Class = "NSMenuItem"; title = "Quit"; ObjectID = "8f2-cF-RxH"; */
+"8f2-cF-RxH.title" = "Выход";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "Помощь";
+
+/* Class = "NSMenuItem"; title = "V2RayX Help"; ObjectID = "FKE-Sm-Kum"; */
+"FKE-Sm-Kum.title" = "Справка V2RayXL";
+
+/* Class = "NSMenuItem"; title = "Update subscription"; ObjectID = "C3a-eC-bFQ"; */
+"C3a-eC-bFQ.title" = "Обновить подписки";
+
+/* Class = "NSMenuItem"; title = "View current config.json..."; ObjectID = "C53-wG-wMg"; */
+"C53-wG-wMg.title" = "Просмотр текущего config.json...";
+
+/* Class = "NSMenuItem"; title = "PAC Mode"; ObjectID = "Cm9-3e-L2z"; */
+"Cm9-3e-L2z.title" = "Режим PAC";
+
+/* Class = "NSMenuItem"; title = "core status"; ObjectID = "EFa-yl-fQC"; */
+"EFa-yl-fQC.title" = "Состояние ядра";
+
+/* Class = "NSMenuItem"; title = "load/unload core"; ObjectID = "I9I-uu-xak"; */
+"I9I-uu-xak.title" = "Загрузить/выгрузить ядро";
+
+/* Class = "NSMenuItem"; title = "Hide V2RayX"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "Скрыть V2RayXL";
+
+/* Class = "NSMenuItem"; title = "Manual Mode"; ObjectID = "P4q-kj-6fs"; */
+"P4q-kj-6fs.title" = "Ручной режим";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "Yq1-i5-ecF"; */
+"Yq1-i5-ecF.title" = "Помощь";
+
+/* Class = "NSMenuItem"; title = "Routing Rule"; ObjectID = "bUi-AV-IfA"; */
+"bUi-AV-IfA.title" = "Правила маршрутизации";
+
+/* Class = "NSMenuItem"; title = "About"; ObjectID = "esg-xy-8ve"; */
+"esg-xy-8ve.title" = "О программе";
+
+/* Class = "NSMenu"; title = "Server"; ObjectID = "eqU-gH-G4L"; */
+"eqU-gH-G4L.title" = "Сервер";
+
+/* Class = "NSMenuItem"; title = "Input password..."; ObjectID = "h9O-kv-Vd7"; */
+"h9O-kv-Vd7.title" = "Ввести пароль...";
+
+/* Class = "NSMenuItem"; title = "Authorize v2rayx_sysconf..."; ObjectID = "mOc-zi-Beb"; */
+"mOc-zi-Beb.title" = "Установить/сбросить плагин xray...";
+
+/* Class = "NSMenuItem"; title = "Reset pac file"; ObjectID = "oGZ-uP-dny"; */
+"oGZ-uP-dny.title" = "Сбросить PAC-файл";
+
+/* Class = "NSMenuItem"; title = "Backup/Export"; ObjectID = "oZx-KW-OLs"; */
+"oZx-KW-OLs.title" = "Экспорт/резервное копирование";
+
+/* Class = "NSMenuItem"; title = "Launch V2RayX at Login"; ObjectID = "qWo-oQ-HUT"; */
+"qWo-oQ-HUT.title" = "Запускать при входе в систему";
+
+/* Class = "NSMenu"; title = "V2RayX"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "V2RayXL";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "Помощь";
+
+/* Class = "NSMenuItem"; title = "Use All"; ObjectID = "xQD-1f-W4t"; */
+"xQD-1f-W4t.title" = "Выбрать все";
+
+/* Class = "NSMenu"; title = "pac file"; ObjectID = "yno-KX-HOj"; */
+"yno-KX-HOj.title" = "PAC-файл";

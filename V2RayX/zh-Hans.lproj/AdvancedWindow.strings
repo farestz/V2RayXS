@@ -81,7 +81,7 @@
 "PNJ-mc-Nhk.title" = "Item 3";
 
 /* Class = "NSTextFieldCell"; title = "v2ray-core/v2ray\nv2ray-core/v2ctl\nv2ray-core/geoip.dat\nv2ray-core/geosite.dat"; ObjectID = "QCH-HC-h7v"; */
-"QCH-HC-h7v.title" = "v2ray-core/v2ray\nv2ray-core/v2ctl\nv2ray-core/geoip.dat\nv2ray-core/geosite.dat";
+"QCH-HC-h7v.title" = "xray-core/xray\nxray-core/geoip.dat\nxray-core/geosite.dat";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Window";
@@ -99,7 +99,7 @@
 "ZeT-4k-vxH.title" = "满足所有以下条件时:";
 
 /* Class = "NSTextFieldCell"; title = "V2RayX is shipped with a v2ray binary file in the app bundle. If anyone wants to use a different v2ray core binary, put the binary file in the following directory:"; ObjectID = "a4D-MW-Gqf"; */
-"a4D-MW-Gqf.title" = "V2RayX 已经附带了v2ray core，如果想使用其它版本，请将文件放入以下目录中:";
+"a4D-MW-Gqf.title" = "xray 二进制文件和地理数据文件存储在以下目录中。V2RayXL 在首次启动时从应用程序包中复制它们。您可以替换为其他版本，但如果这些文件缺失，xray 将无法启动。";
 
 /* Class = "NSButtonCell"; title = "Port"; ObjectID = "aZy-cf-V3d"; */
 "aZy-cf-V3d.title" = "端口";
@@ -135,7 +135,7 @@
 "c9O-2e-b8g.label" = "订阅";
 
 /* Class = "NSTextFieldCell"; title = "When quiting V2RayX, or unloading core, or choosing manual mode:"; ObjectID = "dIM-hU-vOx"; */
-"dIM-hU-vOx.title" = "当退出V2RayX、关闭v2ray-core、使用手动模式时:";
+"dIM-hU-vOx.title" = "当退出V2RayXL、关闭xray-core、使用手动模式时:";
 
 /* Class = "NSTextFieldCell"; placeholderString = "tag"; ObjectID = "dYt-6I-wvZ"; */
 "dYt-6I-wvZ.placeholderString" = "tag";
@@ -174,7 +174,7 @@
 "kZw-NT-AZ4.label" = "配置";
 
 /* Class = "NSTextFieldCell"; title = "Otherwise V2RayX will still use default v2ray core binaries. \nCompatibility is not guaranteed."; ObjectID = "ldu-SF-fOd"; */
-"ldu-SF-fOd.title" = "否则V2rayX仍将使用默认的v2ray core.\n替换它将不会保证兼容性，请慎重";
+"ldu-SF-fOd.title" = "如果这些文件缺失或损坏，xray-core 将无法启动。\n不保证自定义二进制文件的兼容性。";
 
 /* Class = "NSComboBoxCell"; m0j-kv-PFY.ibShadowedObjectValues[0] = "Item 1"; ObjectID = "m0j-kv-PFY"; */
 "m0j-kv-PFY.ibShadowedObjectValues[0]" = "Item 1";

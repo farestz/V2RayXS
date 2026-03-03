@@ -1,0 +1,91 @@
+/* ConfigWindow.strings - Russian */
+
+/* Class = "NSButtonCell"; title = "Import..."; ObjectID = "0Vd-cX-tz4"; */
+"0Vd-cX-tz4.title" = "Импорт...";
+
+/* Class = "NSTextFieldCell"; title = "seperated by comma(,)"; ObjectID = "5N8-C0-QJV"; */
+"5N8-C0-QJV.title" = "разделяйте запятой (,)";
+
+/* Class = "NSMenuItem"; title = "Import from other links..."; ObjectID = "8rA-16-mml"; */
+"8rA-16-mml.title" = "Импорт из других ссылок...";
+
+/* Class = "NSMenuItem"; title = "Import from standard share links..."; ObjectID = "CTZ-Lq-X8f"; */
+"CTZ-Lq-X8f.title" = "Импорт стандартных ss/vmess ссылок...";
+
+/* Class = "NSTextFieldCell"; title = "Network:"; ObjectID = "Dkz-gS-91s"; */
+"Dkz-gS-91s.title" = "Протокол:";
+
+/* Class = "NSMenuItem"; title = "Import from pastboard..."; ObjectID = "EQb-nS-Lf9"; */
+"EQb-nS-Lf9.title" = "Импорт из буфера обмена...";
+
+/* Class = "NSTextFieldCell"; title = "Local Socks5 Port:"; ObjectID = "FRd-8H-tqe"; */
+"FRd-8H-tqe.title" = "Порт SOCKS5:";
+
+/* Class = "NSTableColumn"; headerCell.title = "Server list"; ObjectID = "KrX-3H-19h"; */
+"KrX-3H-19h.headerCell.title" = "Список серверов";
+
+/* Class = "NSTextFieldCell"; title = "alterId:"; ObjectID = "MGr-Dc-svg"; */
+"MGr-Dc-svg.title" = "alterId:";
+
+/* Class = "NSButtonCell"; title = "Advanced..."; ObjectID = "MOG-35-OP1"; */
+"MOG-35-OP1.title" = "Дополнительно...";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "OfO-BZ-76k"; */
+"OfO-BZ-76k.title" = "OK";
+
+/* Class = "NSButtonCell"; title = "Share Over LAN"; ObjectID = "TXX-VD-4P4"; */
+"TXX-VD-4P4.title" = "Общий доступ по LAN";
+
+/* Class = "NSTextFieldCell"; title = "VMess Servers:"; ObjectID = "UpZ-NV-drp"; */
+"UpZ-NV-drp.title" = "Серверы VMess:";
+
+/* Class = "NSTextFieldCell"; title = "Log level:"; ObjectID = "Vo6-Qu-ybt"; */
+"Vo6-Qu-ybt.title" = "Уровень лога:";
+
+/* Class = "NSTextFieldCell"; title = "Security:"; ObjectID = "Yal-OT-vUv"; */
+"Yal-OT-vUv.title" = "Шифрование:";
+
+/* Class = "NSButtonCell"; title = "transport settings..."; ObjectID = "az9-1y-OFB"; */
+"az9-1y-OFB.title" = "Настройки соединения...";
+
+/* Class = "NSTextFieldCell"; title = "Address:"; ObjectID = "c8I-Ek-z9X"; */
+"c8I-Ek-z9X.title" = "Адрес:";
+
+/* Class = "NSMenuItem"; title = "auto (suggested)"; ObjectID = "clS-ih-hzy"; */
+"clS-ih-hzy.title" = "авто (рекомендуется)";
+
+/* Class = "NSTextFieldCell"; title = "Local Http Port:"; ObjectID = "eGi-xf-mFk"; */
+"eGi-xf-mFk.title" = "Порт HTTP:";
+
+/* Class = "NSMenuItem"; title = "Import from standard JSON files..."; ObjectID = "eze-Oh-vyD"; */
+"eze-Oh-vyD.title" = "Импорт из JSON-файла...";
+
+/* Class = "NSButtonCell"; title = "show log"; ObjectID = "gkD-dq-Peq"; */
+"gkD-dq-Peq.title" = "Просмотр лога";
+
+/* Class = "NSTextFieldCell"; title = "User ID:"; ObjectID = "mWH-Q7-PYV"; */
+"mWH-Q7-PYV.title" = "User ID:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "mkg-dU-bRq"; */
+"mkg-dU-bRq.title" = "Отмена";
+
+/* Class = "NSTextFieldCell"; title = "If the local port is changed, the pac file also needs manual modification."; ObjectID = "nRL-kf-uam"; */
+"nRL-kf-uam.title" = "При изменении порта прокси необходимо вручную отредактировать PAC-файл";
+
+/* Class = "NSButtonCell"; title = "Support UDP"; ObjectID = "pEW-Gw-3ph"; */
+"pEW-Gw-3ph.title" = "Поддержка UDP";
+
+/* Class = "NSTextFieldCell"; title = "Tag:"; ObjectID = "qUb-Rh-lCr"; */
+"qUb-Rh-lCr.title" = "Метка:";
+
+/* Class = "NSTextFieldCell"; title = "DNS:"; ObjectID = "sKs-KL-14B"; */
+"sKs-KL-14B.title" = "DNS:";
+
+/* Class = "NSMenuItem"; title = "none"; ObjectID = "foI-bt-EyF"; */
+"foI-bt-EyF.title" = "не сохранять";
+
+/* Class = "NSMenuItem"; title = "none"; ObjectID = "gAx-gn-R2X"; */
+"gAx-gn-R2X.title" = "нет";
+
+/* Class = "NSTextFieldCell"; title = "level:"; ObjectID = "dET-23-6A4"; */
+"dET-23-6A4.title" = "level:";

@@ -54,6 +54,11 @@
 		DC39DC0F27E32D7200AC1F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC39DC0627E32D7200AC1F42 /* Localizable.strings */; };
 		DC39DC1027E32D7200AC1F42 /* AdvancedWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC39DC0827E32D7200AC1F42 /* AdvancedWindow.strings */; };
 		DC39DC1127E32D7200AC1F42 /* ConfigWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC39DC0A27E32D7200AC1F42 /* ConfigWindow.strings */; };
+		BB11220B27E32D7200AC1F42 /* MainMenu.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB11220627E32D7200AC1F42 /* MainMenu.strings */; };
+		BB11220C27E32D7200AC1F42 /* TransportWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB11220727E32D7200AC1F42 /* TransportWindow.strings */; };
+		BB11220D27E32D7200AC1F42 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB11220827E32D7200AC1F42 /* Localizable.strings */; };
+		BB11220E27E32D7200AC1F42 /* AdvancedWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB11220927E32D7200AC1F42 /* AdvancedWindow.strings */; };
+		BB11220F27E32D7200AC1F42 /* ConfigWindow.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB11220A27E32D7200AC1F42 /* ConfigWindow.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +170,11 @@
 		DC39DC0727E32D7200AC1F42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = Localizable.strings; sourceTree = "<group>"; };
 		DC39DC0927E32D7200AC1F42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = AdvancedWindow.strings; sourceTree = "<group>"; };
 		DC39DC0B27E32D7200AC1F42 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = ConfigWindow.strings; sourceTree = "<group>"; };
+		BB11220127E32D7200AC1F42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localizable.strings; sourceTree = "<group>"; };
+		BB11220227E32D7200AC1F42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = MainMenu.strings; sourceTree = "<group>"; };
+		BB11220327E32D7200AC1F42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = TransportWindow.strings; sourceTree = "<group>"; };
+		BB11220427E32D7200AC1F42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = AdvancedWindow.strings; sourceTree = "<group>"; };
+		BB11220527E32D7200AC1F42 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ConfigWindow.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +260,7 @@
 			children = (
 				DC39DBFE27E32D7200AC1F42 /* en.lproj */,
 				DC39DC0127E32D7200AC1F42 /* zh-Hans.lproj */,
+				BB11220027E32D7200AC1F42 /* ru.lproj */,
 				9DDC059421CA8DE900C6C2D7 /* utilities.h */,
 				9DDC059521CA8EAD00C6C2D7 /* utilities.m */,
 				9DBF3AA3213E1921008C7249 /* MutableDeepCopying.h */,
@@ -383,6 +394,18 @@
 			path = "zh-Hans.lproj";
 			sourceTree = "<group>";
 		};
+		BB11220027E32D7200AC1F42 /* ru.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				BB11220627E32D7200AC1F42 /* MainMenu.strings */,
+				BB11220727E32D7200AC1F42 /* TransportWindow.strings */,
+				BB11220827E32D7200AC1F42 /* Localizable.strings */,
+				BB11220927E32D7200AC1F42 /* AdvancedWindow.strings */,
+				BB11220A27E32D7200AC1F42 /* ConfigWindow.strings */,
+			);
+			path = "ru.lproj";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -469,6 +492,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				ru,
 			);
 			mainGroup = 9504C06F1C662C3000352520;
 			productRefGroup = 9504C0791C662C3000352520 /* Products */;
@@ -506,6 +530,11 @@
 				DC39DC0E27E32D7200AC1F42 /* TransportWindow.strings in Resources */,
 				DC39DC0C27E32D7200AC1F42 /* Localizable.strings in Resources */,
 				DC39DC0F27E32D7200AC1F42 /* Localizable.strings in Resources */,
+				BB11220B27E32D7200AC1F42 /* MainMenu.strings in Resources */,
+				BB11220C27E32D7200AC1F42 /* TransportWindow.strings in Resources */,
+				BB11220D27E32D7200AC1F42 /* Localizable.strings in Resources */,
+				BB11220E27E32D7200AC1F42 /* AdvancedWindow.strings in Resources */,
+				BB11220F27E32D7200AC1F42 /* ConfigWindow.strings in Resources */,
 				9504C08D1C662C9100352520 /* ConfigWindow.xib in Resources */,
 				9D24863421CD9EC100C529AB /* config-sample_new.plist in Resources */,
 			);
@@ -653,6 +682,46 @@
 			isa = PBXVariantGroup;
 			children = (
 				DC39DC0B27E32D7200AC1F42 /* zh-Hans */,
+			);
+			name = ConfigWindow.strings;
+			sourceTree = "<group>";
+		};
+		BB11220627E32D7200AC1F42 /* MainMenu.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB11220227E32D7200AC1F42 /* ru */,
+			);
+			name = MainMenu.strings;
+			sourceTree = "<group>";
+		};
+		BB11220727E32D7200AC1F42 /* TransportWindow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB11220327E32D7200AC1F42 /* ru */,
+			);
+			name = TransportWindow.strings;
+			sourceTree = "<group>";
+		};
+		BB11220827E32D7200AC1F42 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB11220127E32D7200AC1F42 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BB11220927E32D7200AC1F42 /* AdvancedWindow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB11220427E32D7200AC1F42 /* ru */,
+			);
+			name = AdvancedWindow.strings;
+			sourceTree = "<group>";
+		};
+		BB11220A27E32D7200AC1F42 /* ConfigWindow.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB11220527E32D7200AC1F42 /* ru */,
 			);
 			name = ConfigWindow.strings;
 			sourceTree = "<group>";

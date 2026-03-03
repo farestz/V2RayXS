@@ -1,0 +1,136 @@
+/* AdvancedWindow.strings - Russian */
+
+/* Class = "NSTextFieldCell"; title = "WARNING: this function is still in beta. Backup before you try!"; ObjectID = "0s7-uP-t1h"; */
+"0s7-uP-t1h.title" = "ВНИМАНИЕ: эта функция в стадии тестирования. Сделайте резервную копию!";
+
+/* Class = "NSTextFieldCell"; title = "Make sure the following files are present:"; ObjectID = "1Vl-aE-8sN"; */
+"1Vl-aE-8sN.title" = "Убедитесь, что следующие файлы существуют:";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "2bW-I2-dXF"; */
+"2bW-I2-dXF.title" = "Отмена";
+
+/* Class = "NSTabViewItem"; label = "Core"; ObjectID = "67G-Pu-y5A"; */
+"67G-Pu-y5A.label" = "Ядро";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "8kA-bO-a9z"; */
+"8kA-bO-a9z.title" = "Сохранить";
+
+/* Class = "NSBox"; title = "Rules"; ObjectID = "A3j-NA-vk6"; */
+"A3j-NA-vk6.title" = "Правила";
+
+/* Class = "NSTextFieldCell"; title = "Input twice to set a new password:"; ObjectID = "AZm-tN-5qT"; */
+"AZm-tN-5qT.title" = "Введите пароль дважды:";
+
+/* Class = "NSTextFieldCell"; title = "Domain Strategy:"; ObjectID = "Abd-Kl-8fv"; */
+"Abd-Kl-8fv.title" = "Стратегия доменов:";
+
+/* Class = "NSButtonCell"; title = "Help"; ObjectID = "BKj-YZ-Vk2"; */
+"BKj-YZ-Vk2.title" = "Помощь";
+
+/* Class = "NSButtonCell"; title = "Edit list"; ObjectID = "E4s-0q-jVZ"; */
+"E4s-0q-jVZ.title" = "Редактировать список";
+
+/* Class = "NSTextFieldCell"; ObjectID = "EAT-73-Qh6"; */
+"EAT-73-Qh6.title" = "Вся конфигурация хранится в ~/Library/Preferences/org.ut.cenmrev.v2rayxl.plist. Чтобы защитить данные от утечки, установите пароль — V2RayXL зашифрует информацию с помощью AES-256-ECB.";
+
+/* Class = "NSTextFieldCell"; ObjectID = "EXS-dL-5V7"; */
+"EXS-dL-5V7.title" = "IP и домены задаются в следующем формате:\n    домены и IP разделяйте строкой `---`.\nПримеры:\n1.\n    v2ray.com\n    ----\n    10.0.0.0/8\n    geoip:private\nсовпадёт с трафиком, где домен содержит \"v2ray.com\" И IP в диапазоне 10.0.0.0/8 или частный IP\n2.\n    domain:v2ray.com\n    ----\nсовпадёт с v2ray.com и *.v2ray.com\n3.\n    ----\n    geoip:private\nсовпадёт со всеми частными IP";
+
+/* Class = "NSTabViewItem"; label = "Encryption"; ObjectID = "EcZ-9w-1Yw"; */
+"EcZ-9w-1Yw.label" = "Безопасность";
+
+/* Class = "NSButtonCell"; title = "Domain"; ObjectID = "FXd-hg-kTV"; */
+"FXd-hg-kTV.title" = "Домен";
+
+/* Class = "NSTextFieldCell"; ObjectID = "GeG-md-J3l"; */
+"GeG-md-J3l.title" = "Когда входящее соединение совпадает со ВСЕМИ критериями (домен/IP/порт/протокол), оно направляется к указанному исходящему тегу.\n\nПредустановленные теги:\n   main: исходящее соединение, выбранное в меню «Сервер»\ndecline: соединение будет закрыто.\n direct: трафик отправляется напрямую.\nbalance: случайный выбор из всех исходящих соединений.";
+
+/* Class = "NSTextFieldCell"; ObjectID = "GuN-KN-aPK"; */
+"GuN-KN-aPK.title" = "Для использования других протоколов добавьте соответствующую конфигурацию. Нажмите \"Помощь\" для инструкций.";
+
+/* Class = "NSButtonCell"; title = "Finish"; ObjectID = "Hv6-1n-72W"; */
+"Hv6-1n-72W.title" = "Готово";
+
+/* Class = "NSTextFieldCell"; ObjectID = "a4D-MW-Gqf"; */
+"a4D-MW-Gqf.title" = "xray-бинарник и файлы геоданных хранятся в директории ниже. V2RayXL копирует их из пакета приложения при первом запуске. Вы можете заменить их другой версией, но если эти файлы отсутствуют, xray не запустится.";
+
+/* Class = "NSTextFieldCell"; ObjectID = "QCH-HC-h7v"; */
+"QCH-HC-h7v.title" = "xray-core/xray\nxray-core/geoip.dat\nxray-core/geosite.dat";
+
+/* Class = "NSTextFieldCell"; ObjectID = "ldu-SF-fOd"; */
+"ldu-SF-fOd.title" = "Если эти файлы отсутствуют или повреждены, xray-core не запустится.\nСовместимость пользовательских бинарников не гарантируется.";
+
+/* Class = "NSButtonCell"; title = "Port"; ObjectID = "aZy-cf-V3d"; */
+"aZy-cf-V3d.title" = "Порт";
+
+/* Class = "NSButtonCell"; title = "IP"; ObjectID = "bEb-OZ-H5Q"; */
+"bEb-OZ-H5Q.title" = "IP";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "c0Q-Wz-IXk"; */
+"c0Q-Wz-IXk.title" = "Отмена";
+
+/* Class = "NSTabViewItem"; label = "Subscription"; ObjectID = "c9O-2e-b8g"; */
+"c9O-2e-b8g.label" = "Подписки";
+
+/* Class = "NSTextFieldCell"; ObjectID = "dIM-hU-vOx"; */
+"dIM-hU-vOx.title" = "При выходе из V2RayXL, выгрузке xray-core или ручном режиме:";
+
+/* Class = "NSButtonCell"; title = "Protocol"; ObjectID = "eJB-Nw-fGt"; */
+"eJB-Nw-fGt.title" = "Протокол";
+
+/* Class = "NSButtonCell"; title = "Inbound Tag"; ObjectID = "hTm-DB-j4B"; */
+"hTm-DB-j4B.title" = "Входящий тег";
+
+/* Class = "NSButtonCell"; title = "Change/setup password"; ObjectID = "hbo-B3-M63"; */
+"hbo-B3-M63.title" = "Установить/изменить пароль";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "hp1-s7-XJV"; */
+"hp1-s7-XJV.title" = "Отмена";
+
+/* Class = "NSTabViewItem"; label = "Rules"; ObjectID = "i0P-1v-Yeh"; */
+"i0P-1v-Yeh.label" = "Правила";
+
+/* Class = "NSButtonCell"; title = "Network:"; ObjectID = "j3B-yf-IFU"; */
+"j3B-yf-IFU.title" = "Тип соединения";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "jQ2-JH-sjq"; */
+"jQ2-JH-sjq.title" = "Сохранить";
+
+/* Class = "NSTabViewItem"; label = "Configs"; ObjectID = "kZw-NT-AZ4"; */
+"kZw-NT-AZ4.label" = "Конфиги";
+
+/* Class = "NSTextFieldCell"; title = "Rule Set Name:"; ObjectID = "nds-1r-ppI"; */
+"nds-1r-ppI.title" = "Название набора правил:";
+
+/* Class = "NSMenuItem"; title = "Turn off system proxy"; ObjectID = "pJL-wh-M4Z"; */
+"pJL-wh-M4Z.title" = "Отключить системный прокси";
+
+/* Class = "NSButtonCell"; title = "Enable Ecryption"; ObjectID = "qR7-nu-QAT"; */
+"qR7-nu-QAT.title" = "Включить шифрование";
+
+/* Class = "NSTextFieldCell"; ObjectID = "qfa-aV-cmn"; */
+"qfa-aV-cmn.title" = "Добавьте ссылку подписки для обновления списка серверов";
+
+/* Class = "NSButtonCell"; title = "Open..."; ObjectID = "sPe-U4-330"; */
+"sPe-U4-330.title" = "Открыть...";
+
+/* Class = "NSTextFieldCell"; ObjectID = "sQg-oW-z1H"; */
+"sQg-oW-z1H.title" = "Для полного контроля над xray-core укажите путь к файлу конфигурации ниже.";
+
+/* Class = "NSButtonCell"; title = "Edit list"; ObjectID = "tWE-zk-ucK"; */
+"tWE-zk-ucK.title" = "Редактировать список";
+
+/* Class = "NSMenuItem"; title = "Restore system proxy to original states"; ObjectID = "uYN-nr-DtG"; */
+"uYN-nr-DtG.title" = "Сбросить системный прокси";
+
+/* Class = "NSTabViewItem"; label = "Outbounds"; ObjectID = "ubo-eB-GSJ"; */
+"ubo-eB-GSJ.label" = "Исходящие соединения";
+
+/* Class = "NSTextFieldCell"; title = "route to:"; ObjectID = "X80-bG-59t"; */
+"X80-bG-59t.title" = "Направить в:";
+
+/* Class = "NSTextFieldCell"; ObjectID = "ZeT-4k-vxH"; */
+"ZeT-4k-vxH.title" = "При выполнении всех следующих условий:";
+
+/* Class = "NSTextFieldCell"; title = "checking..."; ObjectID = "R7w-O4-j5u"; */
+"R7w-O4-j5u.title" = "проверка...";
