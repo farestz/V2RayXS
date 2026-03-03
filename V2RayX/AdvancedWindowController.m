@@ -311,9 +311,9 @@
         [_ruleSetTable reloadData];
     } else if ([sender selectedSegment] == 2) {
         NSAlert* alert = [[NSAlert alloc] init];
-        alert.messageText = @"Do you want to reset rule sets to original three ones?";
+        alert.messageText = NSLocalizedString(@"Do you want to reset rule sets to original three ones?", nil);
         [alert addButtonWithTitle:@"OK"];
-        [alert addButtonWithTitle:@"Cancel"];
+        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
         [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
             if (returnCode == NSAlertFirstButtonReturn) {
                 NSLog(@"will rest");
@@ -523,7 +523,7 @@
     } else if ([@"Core" isEqualToString:tabTitle]) {
         [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://xtls.github.io/en/document/install.html"]];
     } else {
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/farestz/V2RayXS#readme"]];
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/farestz/V2RayXL#readme"]];
     }
 }
 
@@ -610,9 +610,9 @@
         } else {
             self.encryptionKey = [_encryptionKeyConfirmField.stringValue stringByPaddingToLength:32 withString:@"-" startingAtIndex:0];
         }
-        [_changeIndicatorField setStringValue:@"success"];
+        [_changeIndicatorField setStringValue:NSLocalizedString(@"success", nil)];
     } else {
-        [_changeIndicatorField setStringValue:@"two password do not match each other."];
+        [_changeIndicatorField setStringValue:NSLocalizedString(@"two password do not match each other.", nil)];
     }
 }
 

@@ -21,11 +21,11 @@
 "input password to decrypt configurations" = "введите пароль для расшифровки конфигурации";
 "V2RayXL needs to install a small tool to /Library/Application Support/V2RayXL/ with administrator privileges to set system proxy quickly.\nOtherwise you need to type in the administrator password every time you change system proxy through V2RayXL." = "V2RayXL необходимо установить вспомогательную утилиту в /Library/Application Support/V2RayXL/ с правами администратора для быстрой настройки системного прокси.\nИначе вам придётся вводить пароль администратора при каждом изменении системного прокси через V2RayXL.";
 
-"xray-core: loaded" = "xray-core: загружен";
-"Unload core" = "Выгрузить ядро";
-"xray-core: unloaded" = "xray-core: выгружен";
-"Load core" = "Загрузить ядро";
-"The pac file will be reset to the original one coming with V2RayXL. Are you sure to proceed?" = "PAC-файл будет сброшен к версии по умолчанию. Продолжить?";
+"xray-core: loaded" = "xray-core: включен";
+"Unload core" = "Выключить xray";
+"xray-core: unloaded" = "xray-core: выключен";
+"Load core" = "Включить xray";
+"The pac file will be reset to the original one coming with V2RayXL. Are you sure to proceed?" = "PAC-файл будет сброшен к версии по умолчанию из комплекта V2RayXL. Продолжить?";
 "% is not writable!" = "% недоступен для записи!";
 "no available servers, please add server profiles through config window." = "Нет доступных серверов. Добавьте профили через окно конфигурации.";
 "Use All" = "Использовать все";

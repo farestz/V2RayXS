@@ -16,7 +16,7 @@
 "2N5-MP-9vf.title" = "Выход";
 
 /* Class = "NSMenuItem"; title = "Copy HTTP Proxy Shell Export Line"; ObjectID = "2fK-AZ-akH"; */
-"2fK-AZ-akH.title" = "Копировать команду HTTP-прокси для терминала";
+"2fK-AZ-akH.title" = "Копировать команду для терминала";
 
 /* Class = "NSMenuItem"; title = "Edit pac file"; ObjectID = "3NY-51-bgh"; */
 "3NY-51-bgh.title" = "Редактировать PAC-файл";
@@ -58,7 +58,7 @@
 "EFa-yl-fQC.title" = "Состояние ядра";
 
 /* Class = "NSMenuItem"; title = "load/unload core"; ObjectID = "I9I-uu-xak"; */
-"I9I-uu-xak.title" = "Загрузить/выгрузить ядро";
+"I9I-uu-xak.title" = "Включить/выключить xray";
 
 /* Class = "NSMenuItem"; title = "Hide V2RayX"; ObjectID = "Olw-nP-bQN"; */
 "Olw-nP-bQN.title" = "Скрыть V2RayXL";
@@ -82,13 +82,13 @@
 "h9O-kv-Vd7.title" = "Ввести пароль...";
 
 /* Class = "NSMenuItem"; title = "Authorize v2rayx_sysconf..."; ObjectID = "mOc-zi-Beb"; */
-"mOc-zi-Beb.title" = "Установить/сбросить плагин xray...";
+"mOc-zi-Beb.title" = "Установить xray_sysconf";
 
 /* Class = "NSMenuItem"; title = "Reset pac file"; ObjectID = "oGZ-uP-dny"; */
 "oGZ-uP-dny.title" = "Сбросить PAC-файл";
 
 /* Class = "NSMenuItem"; title = "Backup/Export"; ObjectID = "oZx-KW-OLs"; */
-"oZx-KW-OLs.title" = "Экспорт/резервное копирование";
+"oZx-KW-OLs.title" = "Экспорт конфигурации";
 
 /* Class = "NSMenuItem"; title = "Launch V2RayX at Login"; ObjectID = "qWo-oQ-HUT"; */
 "qWo-oQ-HUT.title" = "Запускать при входе в систему";

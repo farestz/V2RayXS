@@ -189,9 +189,9 @@ static NSString * const kGeoBaseURL = @"https://github.com/Loyalsoldier/v2ray-ru
         BOOL tlsEnabled = [self.selectedProfile.streamSettings[@"security"] isEqual: @"tls"];
         if (!tlsEnabled) {
             NSAlert *httpTlsAlerm = [[NSAlert alloc] init];
-            [httpTlsAlerm addButtonWithTitle:@"Close"];
-            [httpTlsAlerm addButtonWithTitle:@"Help"];
-            [httpTlsAlerm setMessageText:@"Both client and server must enable TLS to use HTTP/2 network! Enbale TLS in transport settings. Click \"Help\" if you need more information"];
+            [httpTlsAlerm addButtonWithTitle:NSLocalizedString(@"Close", nil)];
+            [httpTlsAlerm addButtonWithTitle:NSLocalizedString(@"Help", nil)];
+            [httpTlsAlerm setMessageText:NSLocalizedString(@"Both client and server must enable TLS to use HTTP/2 network! Enbale TLS in transport settings. Click \"Help\" if you need more information", nil)];
             [httpTlsAlerm beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
                 if (returnCode == NSAlertSecondButtonReturn) {
                     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.v2ray.com/chapter_02/transport/h2.html#tips"]];
@@ -354,7 +354,7 @@ static NSString * const kGeoBaseURL = @"https://github.com/Loyalsoldier/v2ray-ru
     NSAlert *alert = [[NSAlert alloc] init];
     alert.messageText = prompt;
     [alert addButtonWithTitle:@"OK"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
     NSTextField *inputField = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 400, 24)];
     inputField.usesSingleLineMode = true;
     inputField.lineBreakMode = NSLineBreakByTruncatingHead;
@@ -507,7 +507,7 @@ static NSString * const kGeoBaseURL = @"https://github.com/Loyalsoldier/v2ray-ru
     [alert setMessageText:@"Update Geo Files"];
     [alert setInformativeText:@"Download updated geoip.dat and geosite.dat from Loyalsoldier/v2ray-rules-dat?"];
     [alert addButtonWithTitle:@"Update"];
-    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
     [alert beginSheetModalForWindow:self.window completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {
             [self startGeoDownload];
@@ -548,7 +548,7 @@ static NSString * const kGeoBaseURL = @"https://github.com/Loyalsoldier/v2ray-ru
 
     NSButton *cancelBtn = [[NSButton alloc] initWithFrame:NSMakeRect(270, 10, 90, 28)];
     cancelBtn.bezelStyle = NSBezelStyleRounded;
-    cancelBtn.title = @"Cancel";
+    cancelBtn.title = NSLocalizedString(@"Cancel", nil);
     cancelBtn.target = self;
     cancelBtn.action = @selector(cancelGeoDownload:);
     [cv addSubview:cancelBtn];

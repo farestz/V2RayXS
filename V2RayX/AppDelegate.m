@@ -105,7 +105,7 @@ static AppDelegate *appDelegate;
     NSNumber* setingVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"setingVersion"];
     if(setingVersion == nil || [setingVersion integerValue] != kV2RayXSettingVersion) {
         NSAlert *noServerAlert = [[NSAlert alloc] init];
-        [noServerAlert setMessageText:@"If you are running V2RayXL for the first time, ignore this message. \nSorry, unknown settings!\nAll V2RayXL settings will be reset."];
+        [noServerAlert setMessageText:NSLocalizedString(@"If you are running V2RayXL for the first time, ignore this message. \nSorry, unknown settings!\nAll V2RayXL settings will be reset.", nil)];
         [noServerAlert runModal];
         [self writeDefaultSettings]; //explicitly write default settings to user defaults file
     }
@@ -188,10 +188,10 @@ static AppDelegate *appDelegate;
     if (_enableEncryption && ([profiles count] > 0 || [_subscriptions count] > 0)) {
         NSUserNotification* notification = [[NSUserNotification alloc] init];
         notification.identifier = [NSString stringWithFormat:@"cenmrev.v2rayxl.passwork.%@", [NSUUID UUID]];
-        notification.title = @"Input Password";
-        notification.informativeText = @"input your password to continue";
+        notification.title = NSLocalizedString(@"Input Password", nil);
+        notification.informativeText = NSLocalizedString(@"input your password to continue", nil);
         notification.soundName = NSUserNotificationDefaultSoundName;
-        notification.actionButtonTitle = @"Continue";
+        notification.actionButtonTitle = NSLocalizedString(@"Continue", nil);
         notification.hasActionButton = true;
         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
         [_statusBarItem setMenu:_authMenu];
@@ -203,9 +203,9 @@ static AppDelegate *appDelegate;
 
 - (IBAction)inputPassword:(id)sender {
     NSAlert* alert = [[NSAlert alloc] init];
-    alert.messageText = @"input password to decrypt configurations";
-    [alert addButtonWithTitle:@"Decrypt"];
-    [alert addButtonWithTitle:@"Cancel"];
+    alert.messageText = NSLocalizedString(@"input password to decrypt configurations", nil);
+    [alert addButtonWithTitle:NSLocalizedString(@"Decrypt", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
     NSTextField *input = [[NSSecureTextField alloc] initWithFrame:NSMakeRect(0, 0, 200, 24)];
     [input setStringValue:@""];
     [alert setAccessoryView:input];
@@ -276,9 +276,9 @@ static AppDelegate *appDelegate;
         return YES;
     }
     NSAlert *installAlert = [[NSAlert alloc] init];
-    [installAlert addButtonWithTitle:@"Install"];
-    [installAlert addButtonWithTitle:@"Quit"];
-    [installAlert setMessageText:@"V2RayXL needs to install a small tool to /Library/Application Support/V2RayXL/ with administrator privileges to set system proxy quickly.\nOtherwise you need to type in the administrator password every time you change system proxy through V2RayXL."];
+    [installAlert addButtonWithTitle:NSLocalizedString(@"Install", nil)];
+    [installAlert addButtonWithTitle:NSLocalizedString(@"Quit", nil)];
+    [installAlert setMessageText:NSLocalizedString(@"V2RayXL needs to install a small tool to /Library/Application Support/V2RayXL/ with administrator privileges to set system proxy quickly.\nOtherwise you need to type in the administrator password every time you change system proxy through V2RayXL.", nil)];
     if ([installAlert runModal] == NSAlertFirstButtonReturn) {
         NSLog(@"start install");
         NSString *helperPath = [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], @"install_helper.sh"];
@@ -335,11 +335,11 @@ static AppDelegate *appDelegate;
 }
 
 - (IBAction)openReleasePage:(id)sender {
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/farestz/V2RayXS/releases/latest"]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/farestz/V2RayXL/releases/latest"]];
 }
 
 - (IBAction)checkUpgrade:(id)sender {
-    NSURL* url =[NSURL URLWithString:@"https://api.github.com/repos/farestz/V2RayXS/releases/latest"];
+    NSURL* url =[NSURL URLWithString:@"https://api.github.com/repos/farestz/V2RayXL/releases/latest"];
     NSURLSessionDataTask* task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         @try {
             NSDictionary* d = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -644,14 +644,14 @@ static AppDelegate *appDelegate;
 
 - (void)updateMenus {
     if (proxyState) {
-        [_v2rayStatusItem setTitle:@"xray-core: loaded"];
-        [_enableV2rayItem setTitle:@"Unload core"];
+        [_v2rayStatusItem setTitle:NSLocalizedString(@"xray-core: loaded", nil)];
+        [_enableV2rayItem setTitle:NSLocalizedString(@"Unload core", nil)];
         NSImage *icon = [NSImage imageNamed:@"statusBarIcon"];
         [icon setTemplate:YES];
         [_statusBarItem setImage:icon];
     } else {
-        [_v2rayStatusItem setTitle:@"xray-core: unloaded"];
-        [_enableV2rayItem setTitle:@"Load core"];
+        [_v2rayStatusItem setTitle:NSLocalizedString(@"xray-core: unloaded", nil)];
+        [_enableV2rayItem setTitle:NSLocalizedString(@"Load core", nil)];
         [_statusBarItem setImage:[NSImage imageNamed:@"statusBarIcon_disabled"]];
     }
     [_pacModeItem setState:proxyMode == pacMode];
@@ -690,9 +690,9 @@ static AppDelegate *appDelegate;
 
 - (IBAction)resetPac:(id)sender {
     NSAlert *resetAlert = [[NSAlert alloc] init];
-    [resetAlert setMessageText:@"The pac file will be reset to the original one coming with V2RayX. Are you sure to proceed?"];
-    [resetAlert addButtonWithTitle:@"Yes"];
-    [resetAlert addButtonWithTitle:@"Cancel"];
+    [resetAlert setMessageText:NSLocalizedString(@"The pac file will be reset to the original one coming with V2RayXL. Are you sure to proceed?", nil)];
+    [resetAlert addButtonWithTitle:NSLocalizedString(@"Yes", nil)];
+    [resetAlert addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
     NSModalResponse response = [resetAlert runModal];
     if(response == NSAlertFirstButtonReturn) {
         NSString* simplePac = [[NSBundle mainBundle] pathForResource:@"simple" ofType:@"pac"];
@@ -807,7 +807,7 @@ static AppDelegate *appDelegate;
 - (void)updateServerMenuList {
     [_serverListMenu removeAllItems];
     if ([profiles count] == 0 && [cusProfiles count] == 0 && [_subsOutbounds count] == 0) {
-        [_serverListMenu addItem:[[NSMenuItem alloc] initWithTitle:@"no available servers, please add server profiles through config window." action:nil keyEquivalent:@""]];
+        [_serverListMenu addItem:[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"no available servers, please add server profiles through config window.", nil) action:nil keyEquivalent:@""]];
         if (_subscriptions.count > 0) {
             [_serverListMenu addItem:[NSMenuItem separatorItem]];
             [_serverListMenu addItem:_updateServerItem];
@@ -839,7 +839,7 @@ static AppDelegate *appDelegate;
             i += 1;
         }
         if([profiles count] + [_subsOutbounds count]> 0) {
-            NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:@"Use All" action:@selector(switchServer:) keyEquivalent:@""];
+            NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Use All", nil) action:@selector(switchServer:) keyEquivalent:@""];
             [newItem setTag:kUseAllServer];
             newItem.state = useMultipleServer & !useCusProfile;
             [_serverListMenu addItem:newItem];
