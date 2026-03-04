@@ -151,8 +151,32 @@
 }
 
 - (NSMutableDictionary*)outboundProfile {
-    NSMutableDictionary* fullStreamSettings = [NSMutableDictionary dictionaryWithDictionary:streamSettings];
+    // Build filtered streamSettings: only include the selected transport's settings
+    // to avoid xray parsing unused transport configs (e.g. removed mKCP header/seed).
+    NSMutableDictionary* fullStreamSettings = [NSMutableDictionary dictionary];
     fullStreamSettings[@"network"] = NETWORK_LIST[network];
+
+    // Copy only the selected transport's settings
+    NSDictionary *transportKeyMap = @{
+        @"tcp":  @"tcpSettings",
+        @"kcp":  @"kcpSettings",
+        @"ws":   @"wsSettings",
+        @"http": @"httpSettings",
+        @"quic": @"quicSettings",
+        @"grpc": @"grpcSettings"
+    };
+    NSString *networkName = NETWORK_LIST[network];
+    NSString *transportKey = transportKeyMap[networkName];
+    if (transportKey && streamSettings[transportKey]) {
+        fullStreamSettings[transportKey] = streamSettings[transportKey];
+    }
+
+    // Always include security-related and shared settings
+    for (NSString *key in @[@"security", @"tlsSettings", @"xtlsSettings", @"realitySettings", @"sockopt"]) {
+        if (streamSettings[key]) {
+            fullStreamSettings[key] = streamSettings[key];
+        }
+    }
     NSDictionary* result =
     @{
       @"sendThrough": sendThrough,
