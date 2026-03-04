@@ -81,8 +81,13 @@ static AppDelegate *appDelegate;
     NSString *bundleResources = [[NSBundle mainBundle] resourcePath];
     for (NSString *fileName in @[@"xray", @"geoip.dat", @"geosite.dat"]) {
         NSString *dst = [xrayCoreDir stringByAppendingPathComponent:fileName];
-        if (![fileManager fileExistsAtPath:dst]) {
-            NSString *src = [bundleResources stringByAppendingPathComponent:fileName];
+        NSString *src = [bundleResources stringByAppendingPathComponent:fileName];
+        BOOL needsCopy = ![fileManager fileExistsAtPath:dst];
+        if (!needsCopy && [fileName isEqualToString:@"xray"]) {
+            needsCopy = ![fileManager isExecutableFileAtPath:dst];
+        }
+        if (needsCopy) {
+            [fileManager removeItemAtPath:dst error:nil];
             NSError *copyErr = nil;
             if ([fileManager copyItemAtPath:src toPath:dst error:&copyErr]) {
                 if ([fileName isEqualToString:@"xray"]) {
@@ -123,24 +128,34 @@ static AppDelegate *appDelegate;
     dispatch_async(coreLoopQueue, ^{
         while (true) {
             dispatch_semaphore_wait(self->coreLoopSemaphore, DISPATCH_TIME_FOREVER);
-            self->coreProcess = [[NSTask alloc] init];
-            if (@available(macOS 10.13, *)) {
-                [self->coreProcess setExecutableURL:[NSURL fileURLWithPath:[self getV2rayPath]]];
-            } else {
-                [self->coreProcess setLaunchPath:[self getV2rayPath]];
+            @try {
+                self->coreProcess = [[NSTask alloc] init];
+                NSString *v2rayPath = [self getV2rayPath];
+                NSLog(@"Launching xray from: %@", v2rayPath);
+                if (@available(macOS 10.13, *)) {
+                    [self->coreProcess setExecutableURL:[NSURL fileURLWithPath:v2rayPath]];
+                } else {
+                    [self->coreProcess setLaunchPath:v2rayPath];
+                }
+                [self->coreProcess setArguments:@[@"-config", @"stdin:"]];
+                NSMutableDictionary *coreEnv = [[[NSProcessInfo processInfo] environment] mutableCopy];
+                coreEnv[@"XRAY_LOCATION_ASSET"] = [self getGeoAssetPath];
+                [self->coreProcess setEnvironment:coreEnv];
+                NSPipe *stdinpipe = [NSPipe pipe];
+                [self->coreProcess setStandardInput:stdinpipe];
+                NSData *configData = [NSJSONSerialization dataWithJSONObject:[self generateConfigFile] options:0 error:nil];
+                [[stdinpipe fileHandleForWriting] writeData:configData];
+                [self->coreProcess launch];
+                [[stdinpipe fileHandleForWriting] closeFile];
+                [self->coreProcess waitUntilExit];
+                NSLog(@"xray exited with code %d", [self->coreProcess terminationStatus]);
+            } @catch (NSException *exception) {
+                NSLog(@"Failed to launch xray: %@ — %@", exception.name, exception.reason);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self->proxyState = false;
+                    [self updateMenus];
+                });
             }
-            [self->coreProcess setArguments:@[@"-config", @"stdin:"]];
-            NSMutableDictionary *coreEnv = [[[NSProcessInfo processInfo] environment] mutableCopy];
-            coreEnv[@"XRAY_LOCATION_ASSET"] = [self getGeoAssetPath];
-            [self->coreProcess setEnvironment:coreEnv];
-            NSPipe* stdinpipe = [NSPipe pipe];
-            [self->coreProcess setStandardInput:stdinpipe];
-            NSData* configData = [NSJSONSerialization dataWithJSONObject:[self generateConfigFile] options:0 error:nil];
-            [[stdinpipe fileHandleForWriting] writeData:configData];
-            [self->coreProcess launch];
-            [[stdinpipe fileHandleForWriting] closeFile];
-            [self->coreProcess waitUntilExit];
-            NSLog(@"core exit with code %d", [self->coreProcess terminationStatus]);
         }
     });
     
@@ -1045,7 +1060,11 @@ static AppDelegate *appDelegate;
 //}
 
 -(NSString*)getV2rayPath {
-    return [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/xray", NSHomeDirectory()];
+    NSString *customPath = [NSString stringWithFormat:@"%@/Library/Application Support/V2RayXL/xray-core/xray", NSHomeDirectory()];
+    if ([[NSFileManager defaultManager] isExecutableFileAtPath:customPath]) {
+        return customPath;
+    }
+    return [NSString stringWithFormat:@"%@/xray", [[NSBundle mainBundle] resourcePath]];
 }
 
 -(NSString*)getGeoAssetPath {

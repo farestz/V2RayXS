@@ -774,7 +774,7 @@ Gw
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" id="a4D-MW-Gqf">
                                                 <font key="font" metaFont="system"/>
-                                                <string key="title">The xray binary and geo data files are stored in the directory below. V2RayXL copies them from the app bundle on first launch. You can replace them with a different version, but if these files are missing, xray will not start.</string>
+                                                <string key="title">The xray binary and geo data files are stored in the directory below. V2RayXL copies them from the app bundle on first launch. You can replace them with a different version. If these files are missing, V2RayXL will fall back to the bundled version.</string>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -825,7 +825,7 @@ xray-core/geosite.dat</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <textFieldCell key="cell" lineBreakMode="clipping" id="ldu-SF-fOd">
                                                 <font key="font" metaFont="system"/>
-                                                <string key="title">If these files are missing or corrupted, xray-core will not start.
+                                                <string key="title">If the custom binary fails to start, V2RayXL will use the bundled version.
 Compatibility of custom binaries is not guaranteed.</string>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

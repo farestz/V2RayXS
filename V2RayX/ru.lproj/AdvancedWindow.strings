@@ -52,13 +52,13 @@
 "Hv6-1n-72W.title" = "Готово";
 
 /* Class = "NSTextFieldCell"; ObjectID = "a4D-MW-Gqf"; */
-"a4D-MW-Gqf.title" = "xray-бинарник и файлы геоданных хранятся в директории ниже. V2RayXL копирует их из пакета приложения при первом запуске. Вы можете заменить их другой версией, но если эти файлы отсутствуют, xray не запустится.";
+"a4D-MW-Gqf.title" = "xray-бинарник и файлы геоданных хранятся в директории ниже. V2RayXL копирует их из пакета приложения при первом запуске. Вы можете заменить их другой версией. При отсутствии файлов V2RayXL использует встроенную версию.";
 
 /* Class = "NSTextFieldCell"; ObjectID = "QCH-HC-h7v"; */
 "QCH-HC-h7v.title" = "xray-core/xray\nxray-core/geoip.dat\nxray-core/geosite.dat";
 
 /* Class = "NSTextFieldCell"; ObjectID = "ldu-SF-fOd"; */
-"ldu-SF-fOd.title" = "Если эти файлы отсутствуют или повреждены, xray-core не запустится.\nСовместимость пользовательских бинарников не гарантируется.";
+"ldu-SF-fOd.title" = "Если пользовательский бинарник не работает, V2RayXL использует встроенную версию.\nСовместимость пользовательских бинарников не гарантируется.";
 
 /* Class = "NSButtonCell"; title = "Port"; ObjectID = "aZy-cf-V3d"; */
 "aZy-cf-V3d.title" = "Порт";
