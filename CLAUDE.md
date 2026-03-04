@@ -121,6 +121,20 @@ You MUST launch subagents via the Agent tool with the appropriate `model` parame
 - **Build verification**: run xcodebuild, report success/failure and errors only
 - **Post-change checks**: grep for stale references, verify bundle ID in built .app
 
+## Versioning
+
+- CalVer format: `YY.M.D` (year without century, month, day) — e.g. `26.3.4` = 2026-03-04
+- Git tag format: `v26.3.4`
+- `MARKETING_VERSION` in `project.pbxproj` (2 occurrences: Debug + Release)
+
+## Releases
+
+- Build: `bash build.sh arm64`
+- Assets: `V2RayXL_arm64.app.zip` + `.dgst` (md5, sha1, sha256, sha512)
+- Release notes must be bilingual: Russian section first, then English
+- Pre-release for testing, promote to full release after verification
+- Publish via `gh release create`
+
 ## Important Constraints
 
 - **Objective-C only** — do not introduce Swift files

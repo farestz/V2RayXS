@@ -131,7 +131,8 @@ static AppDelegate *appDelegate;
             @try {
                 self->coreProcess = [[NSTask alloc] init];
                 NSString *v2rayPath = [self getV2rayPath];
-                NSLog(@"Launching xray from: %@", v2rayPath);
+                BOOL isBundled = [v2rayPath hasPrefix:[[NSBundle mainBundle] resourcePath]];
+                NSLog(@"Launching xray from: %@ (%@)", v2rayPath, isBundled ? @"bundled" : @"custom");
                 if (@available(macOS 10.13, *)) {
                     [self->coreProcess setExecutableURL:[NSURL fileURLWithPath:v2rayPath]];
                 } else {

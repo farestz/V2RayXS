@@ -849,7 +849,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 26.3.3;
+				MARKETING_VERSION = 26.3.4;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = cenmrev.V2RayXL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -873,7 +873,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 26.3.3;
+				MARKETING_VERSION = 26.3.4;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = cenmrev.V2RayXL;
 				PRODUCT_NAME = "$(TARGET_NAME)";
